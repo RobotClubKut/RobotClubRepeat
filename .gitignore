@@ -1,32 +1,16 @@
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
 
-# Precompiled Headers
-*.gch
-*.pch
+# PSoC Creator
+codegentemp/
+Generated_Source/
+DP8051/
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
+*.cywrk.*
+*.cyprj.*
+*.cycdx
+*.svd
+*.rpt
+*_timing.html
+*.cyversion
+*.uvopt
+*.uvproj
+*.cyfit
