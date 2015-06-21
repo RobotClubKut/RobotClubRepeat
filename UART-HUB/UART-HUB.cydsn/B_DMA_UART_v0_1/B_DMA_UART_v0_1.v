@@ -393,8 +393,10 @@ assign      rx_interrupt = (RXEnable || HalfDuplexEn) ? rx_interrupt_out : 1'b0;
 
 /* DMA implementation */
 
-assign      tx_drq = TXEnable ? tx_status[UART_TX_STS_TX_FIFO_NOT_FULL] : 1'b0;
-assign      rx_drq = (RXEnable || HalfDuplexEn) ? rx_status[UART_RX_STS_FIFO_NOTEMPTY] : 1'b0;
+wire        tx_drq_out;
+wire        rx_drq_out;
+assign      tx_drq = TXEnable ? tx_drq_out : 1'b0;
+assign      rx_drq = (RXEnable || HalfDuplexEn) ? rx_drq_out : 1'b0;
 
 /**************************************************************************
 *           UART TX Implementation                                        *
@@ -709,6 +711,8 @@ if (TXEnable == 1) begin : sTX
         /* input  [06:00] */  .status(tx_status),
         /* output         */  .interrupt(tx_interrupt_out)
     );
+	
+	assign tx_drq_out = tx_status[UART_TX_STS_TX_FIFO_NOT_FULL];
 
     /**************************************************************************/
     /* Registering tx_en for removing possible glitches                       */
@@ -1255,6 +1259,8 @@ begin:sRX
         /* input  [06:00] */  .status(rx_status),
         /* output         */  .interrupt(rx_interrupt_out)
     );
+	
+	assign rx_drq_out = rx_status[UART_RX_STS_FIFO_NOTEMPTY];
 
     /* RX State Machine */
     always @(posedge clock_op)
