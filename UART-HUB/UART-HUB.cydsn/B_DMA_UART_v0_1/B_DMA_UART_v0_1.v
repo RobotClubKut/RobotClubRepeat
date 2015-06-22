@@ -174,8 +174,10 @@ module B_DMA_UART_v0_1
     output  wire tx,            /* Transmit: Serial Data Output             */
     output  wire rx_interrupt,  /* Interrupt output from the RX section     */
     output  wire tx_interrupt,  /* Interrupt output from the TX section     */
-	output  wire rx_drq,  		/* DMA request output from the RX section   */
-    output  wire tx_drq,  		/* DMA request output from the TX section   */
+	output  wire rx_drq,  		/* DMA request output                       */
+    output  wire tx_drq,  		/* DMA request output                       */
+	output  wire rx_break,  	/* Receive Break Signal output              */
+    output  wire tx_complete,  	/* Transmit Complete Signal output          */
     output  wire rts_n,         /* Request to send output for Flow control  */
     input   wire cts_n,         /* Clear to send input for Flow control     */
     output  reg tx_en,          /* Transmit Enable: Hardware control line output  */
@@ -397,6 +399,13 @@ wire        tx_drq_out;
 wire        rx_drq_out;
 assign      tx_drq = TXEnable ? tx_drq_out : 1'b0;
 assign      rx_drq = (RXEnable || HalfDuplexEn) ? rx_drq_out : 1'b0;
+
+/* Status Signal implementation */
+
+wire        tx_complete_out;
+wire        rx_break_out;
+assign      tx_complete = TXEnable ? tx_complete_out : 1'b0;
+assign      rx_break = (RXEnable || HalfDuplexEn) ? rx_break_out : 1'b0;
 
 /**************************************************************************
 *           UART TX Implementation                                        *
@@ -713,6 +722,7 @@ if (TXEnable == 1) begin : sTX
     );
 	
 	assign tx_drq_out = tx_status[UART_TX_STS_TX_FIFO_NOT_FULL];
+	assign tx_complete_out = tx_status[UART_TX_STS_TX_COMPLETE];
 
     /**************************************************************************/
     /* Registering tx_en for removing possible glitches                       */
@@ -1261,6 +1271,7 @@ begin:sRX
     );
 	
 	assign rx_drq_out = rx_status[UART_RX_STS_FIFO_NOTEMPTY];
+	assign rx_break_out = rx_status[UART_RX_STS_BREAK];
 
     /* RX State Machine */
     always @(posedge clock_op)
