@@ -130,6 +130,7 @@ CY_ISR(isr_tx1)
 	Control_Reg_1_Write(((uint8 *)&crc)[0]);
 	DMA_UART_1_WriteTxData(((uint8 *)&old_crc)[0] = Status_Reg_1_Read());
 	Control_Reg_1_Write(((uint8 *)&crc)[1]);
+	DMA_UART_1_ReadTxStatus();
 	DMA_UART_1_WriteTxData(((uint8 *)&old_crc)[1] = Status_Reg_1_Read());
 	while (!(DMA_UART_1_ReadTxStatus() & DMA_UART_1_TX_STS_COMPLETE));
 	crc_end = CRC_TX_1_ReadCRC();
