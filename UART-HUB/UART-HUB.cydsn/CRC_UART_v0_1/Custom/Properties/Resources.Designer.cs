@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CRC_UART_v1_0.Properties {
+namespace CRC_UART_v0_1.Properties {
     using System;
     
     

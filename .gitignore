@@ -6,7 +6,6 @@ DP8051/
 
 *.cywrk.*
 *.cyprj.*
-*.cycdx
 *.svd
 *.rpt
 *_timing.html
