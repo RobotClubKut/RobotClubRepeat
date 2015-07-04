@@ -61,7 +61,7 @@ int main()
 					
 					SPIM_PutArray((uint8 *)send, len);
 					
-					ibuf += sprintf(buf, "\x1b[31mSPIM %c Send: %s, HEX: ", ch[0], send);
+					ibuf += sprintf(buf, "SPIM %c Send: %s, HEX: \x1b[31m", ch[0], send);
 					for (i = 0; i < len; ++i)
 						ibuf += sprintf(buf + ibuf, "%02x", (uint16)send[i]);
 					sprintf(buf + ibuf, "\n\x1b[0m");
@@ -87,7 +87,7 @@ int main()
 					else if (ch[0] == '2')
 						SPIS_2_PutArray((uint8 *)send, len);
 					
-					ibuf += sprintf(buf, "%sSPIS %c Send: %s, HEX: ", ch[0] == '1' ? "\x1b[32m" : "\x1b[33m", ch[0], send);
+					ibuf += sprintf(buf, "SPIS %c Send: %s, HEX: %s", ch[0], send, ch[0] == '1' ? "\x1b[32m" : "\x1b[33m");
 					for (i = 0; i < len; ++i)
 						ibuf += sprintf(buf + ibuf, "%02x", (uint16)send[i]);
 					sprintf(buf + ibuf, "\n\x1b[0m");
@@ -99,26 +99,30 @@ int main()
 				size_t i, len, ibuf = 0;
 				char buf[256];
 				
-				ibuf = sprintf(buf, "\x1b[31mSPIM Read: ");
+				ibuf = sprintf(buf, "SPIM Read: \x1b[31m");
 				len = SPIM_GetRxBufferSize();
 				for (i = 0; i < len; ++i)
 					ibuf += sprintf(buf + ibuf, "%02x", (uint16)SPIM_ReadRxData());
-				sprintf(buf + ibuf, "\n");
+				sprintf(buf + ibuf, "\n\x1b[0m");
 				UART_PutString(buf);
 				
-				ibuf = sprintf(buf, "\x1b[32mSPIS 1 Read: ");
+				ibuf = sprintf(buf, "SPIS 1 Read: \x1b[32m");
 				len = SPIS_1_GetRxBufferSize();
 				for (i = 0; i < len; ++i)
 					ibuf += sprintf(buf + ibuf, "%02x", (uint16)SPIS_1_ReadRxData());
-				sprintf(buf + ibuf, "\n");
+				sprintf(buf + ibuf, "\n\x1b[0m");
 				UART_PutString(buf);
 				
-				ibuf = sprintf(buf, "\x1b[33mSPIS 2 Read: ");
+				ibuf = sprintf(buf, "SPIS 2 Read: \x1b[33m");
 				len = SPIS_2_GetRxBufferSize();
 				for (i = 0; i < len; ++i)
 					ibuf += sprintf(buf + ibuf, "%02x", (uint16)SPIS_2_ReadRxData());
 				sprintf(buf + ibuf, "\n\x1b[0m");
 				UART_PutString(buf);
+			}
+			else
+			{
+				UART_PutString("\aError\n");
 			}
 		}
     }
