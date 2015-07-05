@@ -22,11 +22,16 @@ int main()
     CyGlobalIntEnable;
 	
 	UART_Start();
-	UART_PutString("\n   Hello, PSoC3 Start\n");
+	
+	UART_PutString(cls);
+	CyDelay(100);
+	UART_PutString("   Hello, PSoC3 Start\n");
 	
 	SPIM_Start();
 	SPIS_1_Start();
 	SPIS_2_Start();
+	
+	Counter_1_Start();
 	
     for(;;)
     {
@@ -59,6 +64,10 @@ int main()
 					else if (ch[0] == '2')
 						SS_Write(1);
 					
+					Counter_1_Init();
+					Counter_1_Enable();
+					Counter_1_WriteCounter(0);
+						
 					SPIM_PutArray((uint8 *)send, len);
 					
 					ibuf += sprintf(buf, "SPIM %c Send: %s, HEX: \x1b[31m", ch[0], send);
