@@ -436,7 +436,7 @@ module B_SPI_HFC_Slave_v0_1(
     assign tx_status[SPIS_STS_TX_BUFFER_NOT_FULL_BIT]  = dpMISO_fifo_not_full;
     assign tx_status[SPIS_STS_BYTE_COMPLETE_BIT]       = byte_complete;
 
-    assign rx_status[SPIS_STS_RX_BUFFER_EMPTY_BIT]     = ~dpMOSI_fifo_not_empty;
+    assign rx_status[SPIS_STS_RX_BUFFER_EMPTY_BIT]     = dpMISO_fifo_empty;
     assign rx_status[SPIS_STS_RX_BUFFER_NOT_EMPTY_BIT] = dpMOSI_fifo_not_empty;
     assign rx_status[SPIS_STS_RX_FIFO_OVERRUN_BIT]     = rx_buf_overrun;
     assign rx_status[SPIS_STS_RX_FIFO_FULL_BIT]        = dpMOSI_fifo_full_reg;
@@ -493,8 +493,11 @@ module B_SPI_HFC_Slave_v0_1(
 		if (inv_ss == 1'b1 && tx_load == 1'b1) begin
 			tde <= dpMISO_fifo_empty;
 		end
+		else if (dpMISO_fifo_not_full == 1'b1) begin
+			tde <= 1'b0;
+		end
 		else begin
-			tde <= dpMISO_fifo_empty ? tde : 1'b0;
+			tde <= tde;
 		end
 	end
 

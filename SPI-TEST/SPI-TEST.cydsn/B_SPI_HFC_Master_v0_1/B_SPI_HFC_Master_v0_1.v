@@ -106,7 +106,7 @@ module B_SPI_HFC_Master_v0_1 (
     output   reg  ss,         /* SPI SS output                */
     output   wire tx_interpt, /* Interrupt output             */
     output   wire rx_interpt, /* Interrupt output             */
-    output   reg tde,        /* TX Data effective            */
+    output   reg  tde,        /* TX Data effective            */
 	output   wire rx_drq,      /* RX DMA request               */
 	output   wire tx_drq       /* TX DMA request               */
 );
@@ -365,12 +365,19 @@ module B_SPI_HFC_Master_v0_1 (
     reg so_send_reg;
     reg mosi_hs_reg;
     reg is_spi_done;
-	reg dpMOSI_fifo_empty_reg;
 	
 	reg dpcounter_one_reg;
 	reg mosi_from_dp_reg;
 
-	assign load_rx_data    = rde ? 1'b0 : (HighSpeedMode == 1 && ModeCPHA == 1) ? dpcounter_one_reg : dpcounter_one;
+	generate
+	if (HighSpeedMode == 1 && ModeCPHA == 1) begin
+		assign load_rx_data = (rde == 1'b1) ? 1'b0 : dpcounter_one_reg;
+	end
+	else begin
+		assign load_rx_data = (rde == 1'b1) ? 1'b0 : dpcounter_one;
+	end
+	endgenerate
+	
     assign miso_to_dp      = miso;
     assign mosi_after_ld   = so_send | so_send_reg;
     assign mosi            = (HighSpeedMode == 1) ? mosi_fin : mosi_reg;
@@ -502,7 +509,7 @@ module B_SPI_HFC_Master_v0_1 (
     	always @(posedge clk_fin) begin
         	case (state)
             SPIM_STATE_IDLE: begin
-				dpMOSI_fifo_empty_reg <= dpMOSI_fifo_empty;
+				tde          <= dpMOSI_fifo_empty;
                 ss           <= 1'b1;
                 cnt_enable   <= 1'b0;
                 mosi_pre_reg <= 1'b0;
@@ -510,7 +517,6 @@ module B_SPI_HFC_Master_v0_1 (
             end
 
             SPIM_STATE_LOAD_TX_DATA: begin
-				tde         <= dpMOSI_fifo_empty_reg;
                 cnt_enable  <= 1'b1;
                 ss          <= 1'b0;
                 mosi_hs_reg <= mosi_from_dp;
@@ -568,9 +574,11 @@ module B_SPI_HFC_Master_v0_1 (
 	    /* "CPHA == 1" State Machine implementation */
 	    /* State Logic */
         always @(posedge clk_fin) begin
+			/*
             mosi_pre_reg <= 1'b0;
             so_send_reg <= 1'b0;
             ld_ident <= 1'b0;
+			*/
             if (!reset) begin
                 case (state)
                 SPIM_STATE_IDLE: begin
@@ -631,7 +639,7 @@ module B_SPI_HFC_Master_v0_1 (
         always @(posedge clk_fin) begin
             case (state)
             SPIM_STATE_IDLE: begin
-				dpMOSI_fifo_empty_reg <= dpMOSI_fifo_empty;
+				tde        <= dpMOSI_fifo_empty;
                 ss         <= 1'b1;
                 cnt_enable <= 1'b0;
                 mosi_reg   <= 1'b0;
@@ -639,7 +647,6 @@ module B_SPI_HFC_Master_v0_1 (
             end
 
             SPIM_STATE_LOAD_TX_DATA: begin
-				tde        <= dpMOSI_fifo_empty_reg;
                 cnt_enable <= 1'b1;
                 ss         <= 1'b0;
                 sclk       <= pol_supprt;
@@ -688,7 +695,7 @@ module B_SPI_HFC_Master_v0_1 (
 
         /* State Logic */
         always @(posedge clk_fin) begin
-            so_send_reg  <= 1'b0;
+            // so_send_reg  <= 1'b0;
             if (!reset) begin
                 case (state)
                 SPIM_STATE_IDLE: begin
@@ -755,7 +762,7 @@ module B_SPI_HFC_Master_v0_1 (
         always @(posedge clk_fin) begin
             case (state)
             SPIM_STATE_IDLE: begin
-				dpMOSI_fifo_empty_reg <= dpMOSI_fifo_empty;
+				tde          <= dpMOSI_fifo_empty;
                 ss           <= 1'b1;
                 cnt_enable   <= 1'b0;
                 mosi_pre_reg <= 1'b0;
@@ -763,7 +770,6 @@ module B_SPI_HFC_Master_v0_1 (
             end
 
             SPIM_STATE_LOAD_TX_DATA: begin
-				tde      <= dpMOSI_fifo_empty_reg;
                 ss       <= 1'b0;
                 sclk     <= pol_supprt;
             end
@@ -833,8 +839,10 @@ module B_SPI_HFC_Master_v0_1 (
     else begin
     /* State Logic */
         always @(posedge clk_fin) begin
+			/*
             mosi_pre_reg <= 1'b0;
             so_send_reg  <= 1'b0;
+			*/
             if (!reset) begin
                 case (state)
                 SPIM_STATE_IDLE: begin
@@ -902,7 +910,7 @@ module B_SPI_HFC_Master_v0_1 (
         always @(posedge clk_fin) begin
             case (state)
             SPIM_STATE_IDLE: begin
-				dpMOSI_fifo_empty_reg <= dpMOSI_fifo_empty;
+				tde        <= dpMOSI_fifo_empty;
                 ss         <= 1'b1;
                 cnt_enable <= 1'b0;
                 mosi_reg   <= 1'b0;
@@ -910,7 +918,6 @@ module B_SPI_HFC_Master_v0_1 (
             end
 
             SPIM_STATE_LOAD_TX_DATA: begin
-				tde      <= dpMOSI_fifo_empty_reg;
                 ss       <= 1'b0;
                 sclk     <= pol_supprt;
             end
