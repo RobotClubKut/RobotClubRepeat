@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="us-ascii"?>
+
+<deviceData version="1"
+  xmlns="http://cypress.com/xsd/cydevicedata"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://cypress.com/xsd/cydevicedata cydevicedata.xsd">
+
+    <block name="`$INSTANCE_NAME`" desc="" visible="true">
+        <block name="`$INSTANCE_NAME`" desc="" visible="true">
+            <register name="TXSTATUS"
+                address="`$INSTANCE_NAME`_BSPIS_TxStsReg__STATUS_REG" 
+                bitWidth="8" desc="SPIS TX Status Register">
+                <field name="SPI_Done" from="0" to="0" access="R" 
+                    desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete
+                          has been set and TX Data FIFO is empty">            
+                </field>
+                <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" 
+                    desc="Set when the TX Data FIFO is not full">            
+                </field>
+                <field name="TX_FIFO_Empty" from="2" to="2" access="R" 
+                    desc="Set when the TX Data FIFO is empty">            
+                </field>
+                <field name="Byte_Word_Complete" from="6" to="6" access="R" 
+                    desc="Set when a byte/word transmit has completed">            
+                </field>
+                <field name="Interrupt" from="7" to="7" access="R" 
+                    desc="Set when interrupt occurs">           
+                </field>        
+            </register>
+        	
+        	<register name="RXSTATUS"
+                address="`$INSTANCE_NAME`_BSPIS_RxStsReg__STATUS_REG"
+                bitWidth="8" desc="SPIS RX Status Register">
+                <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" 
+                    desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO">
+                </field>
+                <field name="RX_FIFO_Empty" from="4" to="4" access="R" 
+                    desc="Set when the RX Data FIFO is empty">
+                </field>
+                <field name="RX_Buf_Overrun" from="5" to="5" access="R" 
+                    desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer
+                          cmemory array (if one exists)">
+                </field>
+                <field name="RX_FIFO_Full" from="6" to="6" access="R" 
+                    desc="Set when the RX Data FIFO is full">            
+                </field>
+                <field name="Interrupt" from="7" to="7" access="R" 
+                    desc="Set when interrupt occurs">           
+                </field>        
+            </register>
+            
+        	<register name="TX_DATA" 
+                address="`$INSTANCE_NAME`_BSPIS_`$VerilogSectionReplacementString`_Dp_u0__A0_REG" 
+                bitWidth="`$NumberOfDataBits`" desc="SPIS TX Data">                  
+            </register>
+        	
+        	<register name="RX_DATA" 
+                address="`$INSTANCE_NAME`_BSPIS_`$VerilogSectionReplacementString`_Dp_u0__A0_REG" 
+                bitWidth="`$NumberOfDataBits`" desc="SPIS RX Data">                
+            </register>
+                
+            </block>
+    </block>
+</deviceData>

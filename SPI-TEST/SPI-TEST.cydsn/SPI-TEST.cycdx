@@ -1,81 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
-  <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="and_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="demux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="SS" BASE="0x0" SIZE="0x0" desc="" visible="true">
-    <register name="SS_CONTROL_REG" address="0x647A" bitWidth="8" desc="" />
-  </block>
   <block name="or_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="cy_constant_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SS" BASE="0x0" SIZE="0x0" desc="" visible="true">
+    <register name="SS_CONTROL_REG" address="0x647F" bitWidth="8" desc="" />
+  </block>
+  <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SPIS_2" BASE="0x0" SIZE="0x0" desc="" visible="true">
+    <block name="VirtualMux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="BSPIS" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="TxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="RxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <register name="SPIS_2_RX_DATA" address="0x640A" bitWidth="8" desc="SPIS RX Data" />
+    <register name="SPIS_2_TX_DATA" address="0x640A" bitWidth="8" desc="SPIS TX Data" />
+    <register name="SPIS_2_TXSTATUS" address="0x6463" bitWidth="8" desc="SPIS TX Status Register">
+      <field name="SPI_Done" from="0" to="0" access="R" resetVal="" desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete                           has been set and TX Data FIFO is empty" />
+      <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" resetVal="" desc="Set when the TX Data FIFO is not full" />
+      <field name="TX_FIFO_Empty" from="2" to="2" access="R" resetVal="" desc="Set when the TX Data FIFO is empty" />
+      <field name="Byte_Word_Complete" from="6" to="6" access="R" resetVal="" desc="Set when a byte/word transmit has completed" />
+      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
+    </register>
+    <register name="SPIS_2_RXSTATUS" address="0x6569" bitWidth="8" desc="SPIS RX Status Register">
+      <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" resetVal="" desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO" />
+      <field name="RX_FIFO_Empty" from="4" to="4" access="R" resetVal="" desc="Set when the RX Data FIFO is empty" />
+      <field name="RX_Buf_Overrun" from="5" to="5" access="R" resetVal="" desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer                           cmemory array (if one exists)" />
+      <field name="RX_FIFO_Full" from="6" to="6" access="R" resetVal="" desc="Set when the RX Data FIFO is full" />
+      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
+    </register>
+  </block>
   <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="Clock_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="Counter_1" BASE="0x0" SIZE="0x0" desc="" visible="true">
-    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="ZeroTerminal_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="TC_vm" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="OneTerminal_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="vmEnableMode" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="ZeroTerminal_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="CounterUDB" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="int_vm" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <register name="Counter_1_COUNTER" address="0x6506" bitWidth="8" desc="UDB.A0 - Current Counter Value" />
-    <register name="Counter_1_PERIOD" address="0x6526" bitWidth="8" desc="UDB.D0 - Assigned Period" />
-    <register name="Counter_1_COMPARE" address="0x6536" bitWidth="8" desc="UDB.D1 - Assigned Compare Value" />
-    <register name="Counter_1_Control_Reg" address="0x6576" bitWidth="8" desc="UDB Control Register - Assigned Control Register Value">
-      <field name="CTRL_ENABLE" from="7" to="7" access="RW" resetVal="" desc="Enable Counter" />
-      <field name="CTRL_CAPMODE" from="4" to="3" access="RW" resetVal="" desc="Capture mode" />
-      <field name="CTRL_CMPMODE" from="2" to="0" access="RW" resetVal="" desc="Compare mode" />
+  <block name="mux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="SPIS_1" BASE="0x0" SIZE="0x0" desc="" visible="true">
+    <block name="VirtualMux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="BSPIS" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="TxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="RxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <register name="SPIS_1_RX_DATA" address="0x640C" bitWidth="8" desc="SPIS RX Data" />
+    <register name="SPIS_1_TX_DATA" address="0x640C" bitWidth="8" desc="SPIS TX Data" />
+    <register name="SPIS_1_RXSTATUS" address="0x6460" bitWidth="8" desc="SPIS RX Status Register">
+      <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" resetVal="" desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO" />
+      <field name="RX_FIFO_Empty" from="4" to="4" access="R" resetVal="" desc="Set when the RX Data FIFO is empty" />
+      <field name="RX_Buf_Overrun" from="5" to="5" access="R" resetVal="" desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer                           cmemory array (if one exists)" />
+      <field name="RX_FIFO_Full" from="6" to="6" access="R" resetVal="" desc="Set when the RX Data FIFO is full" />
+      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
     </register>
-    <register name="Counter_1_STATUS_MASK" address="0x6586" bitWidth="8" desc="UDB Status bits Interrupt Mask Enable Register">
-      <field name="COUNTER_STS_CMP" from="0" to="0" access="RW" resetVal="" desc="Compare output status" />
-      <field name="COUNTER_STS_A0ZERO" from="1" to="1" access="RW" resetVal="" desc="A0 Zero ouput status" />
-      <field name="COUNTER_STS_OVERFLOW" from="2" to="2" access="RW" resetVal="" desc="Overflow status " />
-      <field name="COUNTER_STS_UNDERFLOW" from="3" to="3" access="RW" resetVal="" desc="Underflow status " />
-      <field name="COUNTER_STS_CAPTURE" from="4" to="4" access="RW" resetVal="" desc="Capture Status" />
-      <field name="COUNTER_STS_FIFO_FULL" from="5" to="5" access="RW" resetVal="" desc="FIFO Full Status " />
-      <field name="COUNTER_STS_FIFO_NEMPTY" from="6" to="6" access="RW" resetVal="" desc="FIFO Not Empty Status " />
-    </register>
-    <register name="Counter_1_STATUS_AUX_CTRL" address="0x6596" bitWidth="8" desc="UDB Auxilliary Control Register">
-      <field name="FIFO0_CLR" from="0" to="0" access="RW" resetVal="" desc="FIFO0 clear">
-        <value name="E_FIFO_CLR_0" value="0" desc="Normal FIFO operation" />
-        <value name="E_FIFO_CLR_1" value="1" desc="Clear FIFO state" />
-      </field>
-      <field name="FIFO1_CLR" from="1" to="1" access="RW" resetVal="" desc="FIFO1 clear">
-        <value name="E_FIFO_CLR_0" value="0" desc="Normal FIFO operation" />
-        <value name="E_FIFO_CLR_1" value="1" desc="Clear FIFO state" />
-      </field>
-      <field name="FIFO0_LVL" from="2" to="2" access="RW" resetVal="" desc="FIFO level">
-        <value name="E_FIFO_LVL_0" value="0" desc="FIFO LVL: input mode: FIFO not full; output mode: FIFO not empty" />
-        <value name="E_FIFO_LVL_1" value="1" desc="FIFO LVL: input mode: FIFO at least 1/2 empty; output mode: FIFO at least 1/2 full" />
-      </field>
-      <field name="FIFO1_LVL" from="3" to="3" access="RW" resetVal="" desc="FIFO level">
-        <value name="E_FIFO_LVL_0" value="0" desc="FIFO LVL: input mode: FIFO not full; output mode: FIFO not empty" />
-        <value name="E_FIFO_LVL_1" value="1" desc="FIFO LVL: input mode: FIFO at least 1/2 empty; output mode: FIFO at least 1/2 full" />
-      </field>
-      <field name="INT_EN" from="4" to="4" access="RW" resetVal="" desc="">
-        <value name="E_INT_EN0" value="0" desc="Interrupt disabled" />
-        <value name="E_INT_EN1" value="1" desc="Interrupt enabled" />
-      </field>
-      <field name="CNT_START" from="5" to="5" access="RW" resetVal="" desc="FIFO0 clear">
-        <value name="E_CNT_START0" value="0" desc="Disable counter" />
-        <value name="E_CNT_START1" value="1" desc="Enable counter" />
-      </field>
+    <register name="SPIS_1_TXSTATUS" address="0x6461" bitWidth="8" desc="SPIS TX Status Register">
+      <field name="SPI_Done" from="0" to="0" access="R" resetVal="" desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete                           has been set and TX Data FIFO is empty" />
+      <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" resetVal="" desc="Set when the TX Data FIFO is not full" />
+      <field name="TX_FIFO_Empty" from="2" to="2" access="R" resetVal="" desc="Set when the TX Data FIFO is empty" />
+      <field name="Byte_Word_Complete" from="6" to="6" access="R" resetVal="" desc="Set when a byte/word transmit has completed" />
+      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
     </register>
   </block>
   <block name="Tx_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="nor_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="not_3" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="UART" BASE="0x0" SIZE="0x0" desc="UART" visible="true">
-    <block name="TXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="RXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="TXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <register name="RX_UART_RX_ADDRESS1" address="0x642B" bitWidth="8" desc="RX Address1 Register" />
-    <register name="RX_UART_RX_ADDRESS2" address="0x643B" bitWidth="8" desc="RX Address2 Register" />
-    <register name="TX_UART_TX_DATA" address="0x6442" bitWidth="8" desc="TX Data Register" />
-    <register name="RX_UART_RX_DATA" address="0x644B" bitWidth="8" desc="RX Data Register" />
-    <register name="RX_UART_RX_STATUS" address="0x6462" bitWidth="8" desc="RX status register">
+    <register name="RX_UART_RX_ADDRESS1" address="0x6428" bitWidth="8" desc="RX Address1 Register" />
+    <register name="RX_UART_RX_ADDRESS2" address="0x6438" bitWidth="8" desc="RX Address2 Register" />
+    <register name="RX_UART_RX_DATA" address="0x6448" bitWidth="8" desc="RX Data Register" />
+    <register name="RX_UART_RX_STATUS" address="0x646E" bitWidth="8" desc="RX status register">
       <field name="UART_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="UART_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="UART_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
@@ -84,7 +76,8 @@
       <field name="UART_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
       <field name="UART_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
     </register>
-    <register name="TX_UART_TX_STATUS" address="0x6465" bitWidth="8" desc="TX status register">
+    <register name="TX_UART_TX_DATA" address="0x6548" bitWidth="8" desc="TX Data Register" />
+    <register name="TX_UART_TX_STATUS" address="0x6568" bitWidth="8" desc="TX status register">
       <field name="UART_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="UART_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="UART_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
@@ -92,66 +85,16 @@
     </register>
   </block>
   <block name="Rx_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="not_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  <block name="SPIS_2" BASE="0x0" SIZE="0x0" desc="" visible="true">
-    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="VirtualMux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="TxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="RxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="BSPIS" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <register name="SPIS_2_TX_DATA" address="0x6408" bitWidth="8" desc="SPIS TX Data" />
-    <register name="SPIS_2_RX_DATA" address="0x6408" bitWidth="8" desc="SPIS RX Data" />
-    <register name="SPIS_2_RXSTATUS" address="0x6463" bitWidth="8" desc="SPIS RX Status Register">
-      <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" resetVal="" desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO" />
-      <field name="RX_FIFO_Empty" from="4" to="4" access="R" resetVal="" desc="Set when the RX Data FIFO is empty" />
-      <field name="RX_Buf_Overrun" from="5" to="5" access="R" resetVal="" desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer                           cmemory array (if one exists)" />
-      <field name="RX_FIFO_Full" from="6" to="6" access="R" resetVal="" desc="Set when the RX Data FIFO is full" />
-      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
-    </register>
-    <register name="SPIS_2_TXSTATUS" address="0x6568" bitWidth="8" desc="SPIS TX Status Register">
-      <field name="SPI_Done" from="0" to="0" access="R" resetVal="" desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete                           has been set and TX Data FIFO is empty" />
-      <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" resetVal="" desc="Set when the TX Data FIFO is not full" />
-      <field name="TX_FIFO_Empty" from="2" to="2" access="R" resetVal="" desc="Set when the TX Data FIFO is empty" />
-      <field name="Byte_Word_Complete" from="6" to="6" access="R" resetVal="" desc="Set when a byte/word transmit has completed" />
-      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
-    </register>
-  </block>
   <block name="and_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="demux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="not_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="SPIM" BASE="0x0" SIZE="0x0" desc="" visible="true">
-    <block name="TxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="VirtualMux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="ZeroTerminal_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="VirtualMux_3" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="ZeroTerminal_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="BSPIM" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="RxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-  </block>
-  <block name="SPIS_1" BASE="0x0" SIZE="0x0" desc="" visible="true">
-    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="VirtualMux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="TxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="RxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <block name="BSPIS" BASE="0x0" SIZE="0x0" desc="" visible="true" />
-    <register name="SPIS_1_RXSTATUS" address="0x6467" bitWidth="8" desc="SPIS RX Status Register">
-      <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" resetVal="" desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO" />
-      <field name="RX_FIFO_Empty" from="4" to="4" access="R" resetVal="" desc="Set when the RX Data FIFO is empty" />
-      <field name="RX_Buf_Overrun" from="5" to="5" access="R" resetVal="" desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer                           cmemory array (if one exists)" />
-      <field name="RX_FIFO_Full" from="6" to="6" access="R" resetVal="" desc="Set when the RX Data FIFO is full" />
-      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
-    </register>
-    <register name="SPIS_1_TXSTATUS" address="0x646A" bitWidth="8" desc="SPIS TX Status Register">
-      <field name="SPI_Done" from="0" to="0" access="R" resetVal="" desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete                           has been set and TX Data FIFO is empty" />
-      <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" resetVal="" desc="Set when the TX Data FIFO is not full" />
-      <field name="TX_FIFO_Empty" from="2" to="2" access="R" resetVal="" desc="Set when the TX Data FIFO is empty" />
-      <field name="Byte_Word_Complete" from="6" to="6" access="R" resetVal="" desc="Set when a byte/word transmit has completed" />
-      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
-    </register>
-    <register name="SPIS_1_TX_DATA" address="0x6509" bitWidth="8" desc="SPIS TX Data" />
-    <register name="SPIS_1_RX_DATA" address="0x6509" bitWidth="8" desc="SPIS RX Data" />
   </block>
 </blockRegMap>

@@ -31,8 +31,6 @@ int main()
 	SPIS_1_Start();
 	SPIS_2_Start();
 	
-	Counter_1_Start();
-	
     for(;;)
     {
 		char *str = uart_receive();
@@ -64,9 +62,6 @@ int main()
 					else if (ch[0] == '2')
 						SS_Write(1);
 					
-					Counter_1_Init();
-					Counter_1_Enable();
-					Counter_1_WriteCounter(0);
 						
 					SPIM_PutArray((uint8 *)send, len);
 					

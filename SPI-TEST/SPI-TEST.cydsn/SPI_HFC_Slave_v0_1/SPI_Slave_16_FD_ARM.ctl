@@ -1,0 +1,13 @@
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:`$VerilogSectionReplacementString`:DpMISO:u0\ : label is "U(2,4)";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:TxStsReg\ : label is "U(2,4)";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:sync_3\: label is "U(3,4)0";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:tx_status_0\ : signal is "U(3,5,B)0";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:byte_complete\ : signal is "U(3,5,B)1";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:rx_status_5\ : signal is "U(3,5,B)2";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:dpcounter_one_reg\ : signal is "U(3,5,B)3";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:BitCounter\ : label is "U(2,5)";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:dpcounter_one\ : signal is "U(2,5,B)";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:dpcounter_zero\ : signal is "U(2,5,B)1";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:mosi_rx_empty\ : signal is "U(2,5,B)0";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:`$VerilogSectionReplacementString`:DpMOSI:u0\ : label is "U(3,5)";
+attribute placement_force of \`$INSTANCE_NAME`:BSPIS:`$SiliconRevisionReplacementString`:SPISlave:RxStsReg\ : label is "U(3,5)";
