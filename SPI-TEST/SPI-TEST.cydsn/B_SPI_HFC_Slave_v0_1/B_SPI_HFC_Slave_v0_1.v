@@ -11,16 +11,6 @@
 *                 Control and Status Register definitions
 ********************************************************************************
 *
-*  Control Register Definition
-*  +=======+--------+--------+--------+--------+--------+--------+--------+--------+
-*  |  Bit  |   7    |   6    |   5    |   4    |   3    |   2    |   1    |   0    |
-*  +=======+--------+--------+--------+--------+--------+--------+--------+--------+
-*  | Desc  | unused | unused | unused | unused |unused  |unused  |unused  | tx_en  |
-*  +=======+--------+--------+--------+--------+--------+--------+--------+--------+
-*
-*      tx_en        =>   0 = disable tx (for Bidirectional Mode only)
-*                        1 = enable  tx (fof Bidirectional Mode only)
-*
 *  Tx interrupt Status Register Definition
 *  +=======+--------+--------+--------+--------+--------+--------+--------+--------+
 *  |  Bit  |   7    |   6    |   5    |   4    |   3    |   2    |   1    |   0    |
@@ -101,12 +91,12 @@ module B_SPI_HFC_Slave_v0_1(
     input  wire  reset,         /* System Reset             */
     input  wire  clock,         /* System Clk - 2x Bit rate */
     input  wire  mosi,          /* SPI MOSI input           */
+	input  wire  rde,           /* rx data effective        */
     input  wire  sclk,          /* SPI SCLK input           */
     input  wire  ss,            /* SPI SS input             */
-	input  wire  rde,           /* rx data effective        */
-	
-    output  reg  tde,           /* tx data effective         */
+
     output  wire miso,          /* SPI MISO output                  */
+    output  reg  tde,           /* tx data effective                */
     output  wire tx_interpt,    /* Status Register Interrupt output */
     output  wire rx_interpt,    /* Status Register Interrupt output */
     output  wire tx_drq,        /* tx DMA request                   */
@@ -380,6 +370,7 @@ module B_SPI_HFC_Slave_v0_1(
     wire rx_buf_overrun = mosi_buf_overrun_reg & (~mosi_buf_overrun_fin);
     wire prc_clk_src    = (((ModeCPHA == 0) && (ModePOL == 0)) || ((ModeCPHA == 1) && (ModePOL == 1))) ? sclk : ~sclk;
     wire dp_clk_src     = (((ModeCPHA == 0) && (ModePOL == 1)) || ((ModeCPHA == 1) && (ModePOL == 0))) ? sclk : ~sclk;
+	wire prc_clk;
 
     cy_psoc3_udb_clock_enable_v1_0 #(.sync_mode(`TRUE))
     ClkEn (
