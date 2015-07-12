@@ -3,7 +3,11 @@
   <block name="and_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="or_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="SS" BASE="0x0" SIZE="0x0" desc="" visible="true">
+<<<<<<< HEAD
     <register name="SS_CONTROL_REG" address="0x6474" bitWidth="8" desc="" />
+=======
+    <register name="SS_CONTROL_REG" address="0x6477" bitWidth="8" desc="" />
+>>>>>>> origin/spim
   </block>
   <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="SPIS_2" BASE="0x0" SIZE="0x0" desc="" visible="true">
@@ -13,16 +17,26 @@
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="RxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+<<<<<<< HEAD
     <register name="SPIS_2_RX_DATA" address="0x6404" bitWidth="8" desc="SPIS RX Data" />
     <register name="SPIS_2_TX_DATA" address="0x6404" bitWidth="8" desc="SPIS TX Data" />
     <register name="SPIS_2_TXSTATUS" address="0x6462" bitWidth="8" desc="SPIS TX Status Register">
+=======
+    <register name="SPIS_2_RX_DATA" address="0x6407" bitWidth="8" desc="SPIS RX Data" />
+    <register name="SPIS_2_TX_DATA" address="0x6407" bitWidth="8" desc="SPIS TX Data" />
+    <register name="SPIS_2_TXSTATUS" address="0x6465" bitWidth="8" desc="SPIS TX Status Register">
+>>>>>>> origin/spim
       <field name="SPI_Done" from="0" to="0" access="R" resetVal="" desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete                           has been set and TX Data FIFO is empty" />
       <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" resetVal="" desc="Set when the TX Data FIFO is not full" />
       <field name="TX_FIFO_Empty" from="2" to="2" access="R" resetVal="" desc="Set when the TX Data FIFO is empty" />
       <field name="Byte_Word_Complete" from="6" to="6" access="R" resetVal="" desc="Set when a byte/word transmit has completed" />
       <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
     </register>
+<<<<<<< HEAD
     <register name="SPIS_2_RXSTATUS" address="0x6465" bitWidth="8" desc="SPIS RX Status Register">
+=======
+    <register name="SPIS_2_RXSTATUS" address="0x6468" bitWidth="8" desc="SPIS RX Status Register">
+>>>>>>> origin/spim
       <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" resetVal="" desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO" />
       <field name="RX_FIFO_Empty" from="4" to="4" access="R" resetVal="" desc="Set when the RX Data FIFO is empty" />
       <field name="RX_Buf_Overrun" from="5" to="5" access="R" resetVal="" desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer                           cmemory array (if one exists)" />
@@ -39,7 +53,20 @@
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="not_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="RxInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+<<<<<<< HEAD
     <register name="SPIS_1_TXSTATUS" address="0x6469" bitWidth="8" desc="SPIS TX Status Register">
+=======
+    <register name="SPIS_1_RX_DATA" address="0x6408" bitWidth="8" desc="SPIS RX Data" />
+    <register name="SPIS_1_TX_DATA" address="0x6408" bitWidth="8" desc="SPIS TX Data" />
+    <register name="SPIS_1_RXSTATUS" address="0x646A" bitWidth="8" desc="SPIS RX Status Register">
+      <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" resetVal="" desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO" />
+      <field name="RX_FIFO_Empty" from="4" to="4" access="R" resetVal="" desc="Set when the RX Data FIFO is empty" />
+      <field name="RX_Buf_Overrun" from="5" to="5" access="R" resetVal="" desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer                           cmemory array (if one exists)" />
+      <field name="RX_FIFO_Full" from="6" to="6" access="R" resetVal="" desc="Set when the RX Data FIFO is full" />
+      <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
+    </register>
+    <register name="SPIS_1_TXSTATUS" address="0x6567" bitWidth="8" desc="SPIS TX Status Register">
+>>>>>>> origin/spim
       <field name="SPI_Done" from="0" to="0" access="R" resetVal="" desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete                           has been set and TX Data FIFO is empty" />
       <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" resetVal="" desc="Set when the TX Data FIFO is not full" />
       <field name="TX_FIFO_Empty" from="2" to="2" access="R" resetVal="" desc="Set when the TX Data FIFO is empty" />
@@ -63,6 +90,7 @@
     <block name="RXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+<<<<<<< HEAD
     <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <register name="RX_UART_RX_ADDRESS1" address="0x6429" bitWidth="8" desc="RX Address1 Register" />
     <register name="RX_UART_RX_ADDRESS2" address="0x6439" bitWidth="8" desc="RX Address2 Register" />
@@ -75,6 +103,12 @@
       <field name="UART_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
     </register>
     <register name="RX_UART_RX_STATUS" address="0x646A" bitWidth="8" desc="RX status register">
+=======
+    <register name="RX_UART_RX_ADDRESS1" address="0x6422" bitWidth="8" desc="RX Address1 Register" />
+    <register name="RX_UART_RX_ADDRESS2" address="0x6432" bitWidth="8" desc="RX Address2 Register" />
+    <register name="RX_UART_RX_DATA" address="0x6442" bitWidth="8" desc="RX Data Register" />
+    <register name="RX_UART_RX_STATUS" address="0x6466" bitWidth="8" desc="RX status register">
+>>>>>>> origin/spim
       <field name="UART_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="UART_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="UART_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
