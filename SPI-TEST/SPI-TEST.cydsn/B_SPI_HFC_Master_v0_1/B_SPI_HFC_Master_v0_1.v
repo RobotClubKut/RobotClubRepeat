@@ -119,7 +119,6 @@ module B_SPI_HFC_Master_v0_1(
 
 	localparam [6:0] BitCntPeriod = (NumberOfDataBits << 1) - 1;
 	wire [6:0] count;
-	wire cnt_tc;
 	reg cnt_enable;
 	cy_psoc3_count7 #(.cy_period(BitCntPeriod), .cy_route_ld(0), .cy_route_en(1))
 	BitCounter(
@@ -128,7 +127,7 @@ module B_SPI_HFC_Master_v0_1(
 		/* input          */ .load(1'b0),
 		/* input          */ .enable(cnt_enable),
 		/* output [06:00] */ .count(count),
-		/* output         */ .tc(cnt_tc)
+		/* output         */ .tc()
 	);
 
 	wire dpcounter_one = (count[4:0] == 5'h1);
@@ -143,6 +142,7 @@ module B_SPI_HFC_Master_v0_1(
 	wire dpMISO_fifo_full;
 
 	reg rde_reg;
+	reg dpMOSI_fifo_empty_reg;
 	generate
 	if (HighSpeedMode) begin
 		always @(posedge clk_fin) begin
@@ -152,7 +152,7 @@ module B_SPI_HFC_Master_v0_1(
 	end
 	endgenerate
 
-	wire load_rx_data = rde_reg ? 1'b0 : (HighSpeedMode == 1 && ModeCPHA == 1) ? dpcounter_one_reg : dpcounter_one;
+	wire load_rx_data = ((HighSpeedMode == 1 && ModeCPHA == 1) ? dpcounter_one_reg : dpcounter_one) & ~rde_reg;
 	reg ld_ident;
 	reg is_spi_done;
 
@@ -167,11 +167,20 @@ module B_SPI_HFC_Master_v0_1(
 	localparam SPIM_STATE_SEND_TX_DATA_2    = 3'h7;
 	reg [2:0] state;
 
+
+	wire rde_fin;
+	cy_psoc3_sync sync_1(
+		.sc_out(rde_fin),
+		.sc_in(rde),
+		.clock(clk_fin)
+	);
+
 	generate
 	if (ModeCPHA == 1 && HighSpeedMode) begin
 		/* State Logic */
 		always @(posedge clk_fin) begin
 			if (reset) begin
+				rde_reg <= 1'b1;
 				state <= SPIM_STATE_IDLE;
 			end
 			else begin
@@ -181,8 +190,8 @@ module B_SPI_HFC_Master_v0_1(
 					cnt_enable <= 1'b0;
 					sclk       <= ModePOL;
 					tde        <= dpMOSI_fifo_empty;
-					rde_reg    <= rde;
-					state      <= (dpMOSI_fifo_empty && rde_reg) ? SPIM_STATE_IDLE : SPIM_STATE_LOAD_TX_DATA;
+					rde_reg    <= rde_fin;
+					state      <= (dpMOSI_fifo_empty) ? SPIM_STATE_IDLE : SPIM_STATE_LOAD_TX_DATA;
 				end
 
 				SPIM_STATE_LOAD_TX_DATA: begin// 15
@@ -199,7 +208,7 @@ module B_SPI_HFC_Master_v0_1(
 
 				SPIM_STATE_SEND_TX_DATA: begin // 13
 					sclk    <= ModePOL;
-					rde_reg <= rde;
+					rde_reg <= rde_fin;
 					if (dpcounter_one && is_spi_done) begin
 						cnt_enable <= 1'b0;
 						state      <= SPIM_STATE_SPI_DONE;
@@ -212,15 +221,20 @@ module B_SPI_HFC_Master_v0_1(
 				SPIM_STATE_CAPT_RX_DATA: begin // 12
 					mosi <= mosi_from_dp_reg;
 					sclk <= ~ModePOL;
-					if (count[4:0] != 5'h04) begin
+
+					if (count[4:0] != 5'h4) begin
+						if (count[4:0] == 5'h0) begin
+							tde <= dpMOSI_fifo_empty_reg;
+						end
 						state <= SPIM_STATE_SEND_TX_DATA;
 					end
-					else if (!dpMOSI_fifo_empty) begin
-							state <= SPIM_STATE_SHFT_N_LD_TX_DATA;
-					end
-					else begin
+					else if (dpMOSI_fifo_empty && rde_reg) begin
 						is_spi_done <= 1'b1;
 						state       <= SPIM_STATE_SEND_TX_DATA;
+					end
+					else begin
+						dpMOSI_fifo_empty_reg <= dpMOSI_fifo_empty;
+						state <= SPIM_STATE_SHFT_N_LD_TX_DATA;
 					end
 				end
 

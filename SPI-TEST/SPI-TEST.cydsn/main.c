@@ -17,20 +17,26 @@
 #define ESC 0x1b
 const char cls[] = {ESC, 'c', 0};
 
+#define SPIS_START '1'
+#define SPIS_END '3'
+
+uint8 (* const SPIS_GetRxBufferSize[])(void) = {SPIS_1_GetRxBufferSize, SPIS_2_GetRxBufferSize, SPIS_3_GetRxBufferSize};
+uint8 (* const SPIS_ReadRxData[])(void) = {SPIS_1_ReadRxData, SPIS_2_ReadRxData, SPIS_3_ReadRxData};
+void (* const SPIS_PutArray[])(const uint8*, uint8) = {SPIS_1_PutArray, SPIS_2_PutArray, SPIS_3_PutArray};
+
+
 int main()
 {
-    CyGlobalIntEnable;
-	
 	UART_Start();
-	
-	UART_PutString(cls);
-	CyDelay(100);
-	UART_PutString("   Hello, PSoC3 Start\n");
 	
 	SPIM_Start();
 	SPIS_1_Start();
 	SPIS_2_Start();
-	
+	SPIS_3_Start();
+	CyGlobalIntEnable;
+	UART_PutString(cls);
+	CyDelay(100);
+	UART_PutString("   Hello, PSoC3 Start\n");
     for(;;)
     {
 		char *str = uart_receive();
@@ -50,22 +56,18 @@ int main()
 				char *ch, *send;
 				if (
 					(ch = strtok(str + 4, " ")) != NULL 
-					&& (ch[0] == '1' || ch[0] == '2')
+					&& (ch[0] >= SPIS_START && ch[0] <= SPIS_END)
 					&& (send = strtok(NULL, " ")) != NULL
 					&& (len = strlen(send)) > 0
 				)
 				{
-					size_t i, ibuf = 0;
+					size_t i, ibuf;
 					char buf[256];
-					if (ch[0] == '1')
-						SS_Write(0);
-					else if (ch[0] == '2')
-						SS_Write(1);
 					
-						
+					SS_Write(ch[0] - SPIS_START);
 					SPIM_PutArray((uint8 *)send, len);
 					
-					ibuf += sprintf(buf, "SPIM %c Send: %s, HEX: \x1b[31m", ch[0], send);
+					ibuf = sprintf(buf, "\x1b[31mSPIM \x1b[3%cm%c\x1b[0m Send: \x1b[3%cm%s\x1b[0m, HEX: \x1b[3%cm", ch[0] + 1, ch[0], ch[0] + 1, send, ch[0] + 1);
 					for (i = 0; i < len; ++i)
 						ibuf += sprintf(buf + ibuf, "%02x", (uint16)send[i]);
 					sprintf(buf + ibuf, "\n\x1b[0m");
@@ -78,22 +80,21 @@ int main()
 				char *ch, *send;
 				if (
 					(ch = strtok(str + 4, " ")) != NULL 
-					&& (ch[0] == '1' || ch[0] == '2')
+					&& (ch[0] >= SPIS_START && ch[0] <= SPIS_END)
 					&& (send = strtok(NULL, " ")) != NULL
 					&& (len = strlen(send)) > 0
 				)
 				{
-					size_t i, ibuf = 0;
+					size_t i, ibuf;
 					char buf[256];
 					
-					if (ch[0] == '1')
-						SPIS_1_PutArray((uint8 *)send, len);
-					else if (ch[0] == '2')
-						SPIS_2_PutArray((uint8 *)send, len);
+					ibuf = sprintf(buf, "\x1b[3%cmSPIS %c\x1b[0m Send: \x1b[31m%s\x1b[0m, HEX: \x1b[31m", ch[0] + 1, ch[0], send);
+					SPIS_PutArray[ch[0] - SPIS_START]((uint8 *)send, len);
 					
-					ibuf += sprintf(buf, "SPIS %c Send: %s, HEX: %s", ch[0], send, ch[0] == '1' ? "\x1b[32m" : "\x1b[33m");
+					
 					for (i = 0; i < len; ++i)
 						ibuf += sprintf(buf + ibuf, "%02x", (uint16)send[i]);
+	
 					sprintf(buf + ibuf, "\n\x1b[0m");
 					UART_PutString(buf);
 				}
@@ -102,32 +103,46 @@ int main()
 			{
 				size_t i, len, ibuf = 0;
 				char buf[256];
+				uint8 buf2[64];
+				char c;
 				
-				ibuf = sprintf(buf, "SPIM Read: \x1b[31m");
+				ibuf = sprintf(buf, "\x1b[31mSPIM\x1b[0m Read: \x1b[31m");
 				len = SPIM_GetRxBufferSize();
 				for (i = 0; i < len; ++i)
-					ibuf += sprintf(buf + ibuf, "%02x", (uint16)SPIM_ReadRxData());
+					buf2[i] = SPIM_ReadRxData();
+				for (i = 0; i < len; ++i)
+					if (buf2[i] >= ' ' && buf2[i] <= '~')
+						ibuf += sprintf(buf + ibuf, "%c", buf2[i]);
+					else
+						ibuf += sprintf(buf + ibuf, "\\x%02x", (uint16)buf2[i]);
+				ibuf += sprintf(buf + ibuf, "\x1b[0m, HEX: \x1b[31m");
+				for (i = 0; i < len; ++i)
+					ibuf += sprintf(buf + ibuf, "%02x", (uint16)buf2[i]);
+			
 				sprintf(buf + ibuf, "\n\x1b[0m");
 				UART_PutString(buf);
 				
-				ibuf = sprintf(buf, "SPIS 1 Read: \x1b[32m");
-				len = SPIS_1_GetRxBufferSize();
-				for (i = 0; i < len; ++i)
-					ibuf += sprintf(buf + ibuf, "%02x", (uint16)SPIS_1_ReadRxData());
-				sprintf(buf + ibuf, "\n\x1b[0m");
-				UART_PutString(buf);
-				
-				ibuf = sprintf(buf, "SPIS 2 Read: \x1b[33m");
-				len = SPIS_2_GetRxBufferSize();
-				for (i = 0; i < len; ++i)
-					ibuf += sprintf(buf + ibuf, "%02x", (uint16)SPIS_2_ReadRxData());
-				sprintf(buf + ibuf, "\n\x1b[0m");
-				UART_PutString(buf);
+				for (c = SPIS_START; c <= SPIS_END; ++c)
+				{
+					ibuf = sprintf(buf, "\x1b[3%cmSPIS %c\x1b[0m Read: \x1b[3%cm", c + 1, c, c + 1);
+					len = SPIS_GetRxBufferSize[c - SPIS_START]();
+					for (i = 0; i < len; ++i)
+						buf2[i] = SPIS_ReadRxData[c - SPIS_START]();
+					for (i = 0; i < len; ++i)
+						if (buf2[i] >= ' ' && buf2[i] <= '~')
+							ibuf += sprintf(buf + ibuf, "%c", buf2[i]);
+						else
+							ibuf += sprintf(buf + ibuf, "\\x%02x", (uint16)buf2[i]);				
+					ibuf += sprintf(buf + ibuf, "\x1b[0m, HEX: \x1b[3%cm", c + 1);
+					for (i = 0; i < len; ++i)
+						ibuf += sprintf(buf + ibuf, "%02x", (uint16)buf2[i]);
+						
+					sprintf(buf + ibuf, "\n\x1b[0m");
+					UART_PutString(buf);
+				}
 			}
 			else
-			{
 				UART_PutString("\aError\n");
-			}
 		}
     }
 }

@@ -38,7 +38,7 @@ char* uart_receive()
 		
 		flag.r = 0;
 		
-		if (ch >= ' ' && ch <= '~' && pbuf < RX_BUFF_SIZE - 1)
+		if ((ch >= ' ' && ch <= '~') && pbuf < RX_BUFF_SIZE - 1)
 		{
 			UART_PutChar(ch);			buf[pbuf++] = ch;
 		}
