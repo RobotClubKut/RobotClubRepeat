@@ -1,6 +1,6 @@
-update=2015/07/13 15:49:08
+update=2015/07/20 19:27:11
 version=1
-last_client=cvpcb
+last_client=kicad
 [pcbnew]
 version=1
 LastNetListRead=
@@ -48,9 +48,12 @@ LibName24=user_IC/PSoC3_Board
 LibDir=../../../../../../../Program Files (x86)/KiCad/share/modules;../../../../lib_mod
 [general]
 version=1
+[cvpcb]
+version=1
+NetIExt=net
 [eeschema]
 version=1
-LibDir=../../../../../Dropbox/基盤班/基盤データ・回路図/kicad/Librarys/lib_cmp
+LibDir=../../../../../Dropbox/基盤班/基盤データ・回路図/kicad/Librarys/lib_cmp;../../../KiCadComponents
 [eeschema/libraries]
 LibName1=HubBoard-rescue
 LibName2=power
@@ -92,6 +95,33 @@ LibName37=C:/Users/Matuda_Kazuaki/Dropbox/基盤班/基盤データ・回路図/
 LibName38=C:/Users/Matuda_Kazuaki/Dropbox/基盤班/基盤データ・回路図/kicad/Librarys/lib_cmp/user_special
 LibName39=C:/Users/Matuda_Kazuaki/Dropbox/基盤班/基盤データ・回路図/kicad/Librarys/lib_cmp/user_SW
 LibName40=C:/Users/Matuda_Kazuaki/Dropbox/基盤班/基盤データ・回路図/kicad/Librarys/lib_cmp/user_μC
-[cvpcb]
+LibName41=user_communication
+LibName42=user_conn
+LibName43=user_conn_KRP
+LibName44=user_IC
+LibName45=user_Passive
+LibName46=user_regul
+LibName47=user_sensor
+LibName48=user_special
+LibName49=user_SW
+LibName50=user_μC
+LibName51=RoboKUT_communication
+LibName52=RoboKUT_conn
+LibName53=RoboKUT_conn_KRP
+LibName54=RoboKUT_IC
+LibName55=RoboKUT_Passive
+LibName56=RoboKUT_regul
+LibName57=RoboKUT_sensor
+LibName58=RoboKUT_special
+LibName59=RoboKUT_SW
+LibName60=RoboKUT_uC
+[schematic_editor]
 version=1
-NetIExt=net
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
