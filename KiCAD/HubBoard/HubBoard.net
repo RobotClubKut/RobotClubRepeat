@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source C:\Users\Matuda_Kazuaki\Documents\GitHub\RobotClubRepeat\KiCAD\HubBoard\HubBoard.sch)
-    (date "2015/07/25 23:30:05")
+    (source C:/Users/Matuda_Kazuaki/Documents/GitHub/RobotClubRepeat/KiCAD/HubBoard/HubBoard.sch)
+    (date "2015/07/26 17:52:25")
     (tool "Eeschema (2015-07-11 BZR 5925, Git c291b88)-product")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -311,25 +311,25 @@
       (tstamp 55A68E3A))
     (comp (ref U9)
       (value drill_3mm)
-      (footprint Wire_Pads:SolderWirePad_single_1-5mmDrill)
+      (footprint user_Passive:dril_3mm)
       (libsource (lib HubBoard-cache) (part drill_3mm))
       (sheetpath (names /) (tstamps /))
       (tstamp 55A68DA0))
     (comp (ref U11)
       (value drill_3mm)
-      (footprint Wire_Pads:SolderWirePad_single_1-5mmDrill)
+      (footprint user_Passive:dril_3mm)
       (libsource (lib HubBoard-cache) (part drill_3mm))
       (sheetpath (names /) (tstamps /))
       (tstamp 55A69247))
     (comp (ref U12)
       (value drill_3mm)
-      (footprint Wire_Pads:SolderWirePad_single_1-5mmDrill)
+      (footprint user_Passive:dril_3mm)
       (libsource (lib HubBoard-cache) (part drill_3mm))
       (sheetpath (names /) (tstamps /))
       (tstamp 55A692CA))
     (comp (ref U13)
       (value drill_3mm)
-      (footprint Wire_Pads:SolderWirePad_single_1-5mmDrill)
+      (footprint user_Passive:dril_3mm)
       (libsource (lib HubBoard-cache) (part drill_3mm))
       (sheetpath (names /) (tstamps /))
       (tstamp 55A6936B))
@@ -400,86 +400,6 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 55B4E3F6)))
   (libparts
-    (libpart (lib HubBoard-rescue) (part C-RESCUE-HubBoard)
-      (footprints
-        (fp SM*)
-        (fp C?)
-        (fp C1-1))
-      (fields
-        (field (name Reference) C)
-        (field (name Value) C-RESCUE-HubBoard))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib HubBoard-rescue) (part R-RESCUE-HubBoard)
-      (footprints
-        (fp R?)
-        (fp SM0603)
-        (fp SM0805)
-        (fp R?-*)
-        (fp SM1206))
-      (fields
-        (field (name Reference) R)
-        (field (name Value) R-RESCUE-HubBoard))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib HubBoard-rescue) (part CP1-RESCUE-HubBoard)
-      (footprints
-        (fp CP*)
-        (fp SM*))
-      (fields
-        (field (name Reference) C)
-        (field (name Value) CP1-RESCUE-HubBoard))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib device) (part Crystal)
-      (description "Two pin crystal")
-      (footprints
-        (fp Crystal_*))
-      (fields
-        (field (name Reference) Y)
-        (field (name Value) Crystal))
-      (pins
-        (pin (num 1) (name 1) (type passive))
-        (pin (num 2) (name 2) (type passive))))
-    (libpart (lib device) (part D)
-      (description Diode)
-      (footprints
-        (fp Diode_*)
-        (fp D-Pak_TO252AA)
-        (fp *SingleDiode)
-        (fp *_Diode_*)
-        (fp *SingleDiode*))
-      (fields
-        (field (name Reference) D)
-        (field (name Value) D))
-      (pins
-        (pin (num 1) (name K) (type passive))
-        (pin (num 2) (name A) (type passive))))
-    (libpart (lib device) (part INDUCTOR)
-      (fields
-        (field (name Reference) L)
-        (field (name Value) INDUCTOR))
-      (pins
-        (pin (num 1) (name 1) (type passive))
-        (pin (num 2) (name 2) (type passive))))
-    (libpart (lib device) (part LED)
-      (footprints
-        (fp LED-3MM)
-        (fp LED-5MM)
-        (fp LED-10MM)
-        (fp LED-0603)
-        (fp LED-0805)
-        (fp LED-1206)
-        (fp LEDV))
-      (fields
-        (field (name Reference) D)
-        (field (name Value) LED))
-      (pins
-        (pin (num 1) (name K) (type passive))
-        (pin (num 2) (name A) (type passive))))
     (libpart (lib device) (part R)
       (description Resistor)
       (footprints
@@ -491,74 +411,6 @@
       (pins
         (pin (num 1) (name ~) (type passive))
         (pin (num 2) (name ~) (type passive))))
-    (libpart (lib user_conn) (part CONN_WHITE_3)
-      (description "Molex, KKseries, Power")
-      (fields
-        (field (name Reference) CN)
-        (field (name Value) CONN_WHITE_3))
-      (pins
-        (pin (num 1) (name P1) (type passive))
-        (pin (num 2) (name P2) (type passive))
-        (pin (num 3) (name P3) (type passive))))
-    (libpart (lib user_communication) (part Mini-B)
-      (fields
-        (field (name Reference) U)
-        (field (name Value) Mini-B))
-      (pins
-        (pin (num 1) (name Vbus) (type input))
-        (pin (num 2) (name D-) (type input))
-        (pin (num 3) (name D+) (type input))
-        (pin (num 4) (name NC) (type input))
-        (pin (num 5) (name GND) (type input))))
-    (libpart (lib user_conn) (part CONN_WHITE_5)
-      (description "Molex, KKseries")
-      (fields
-        (field (name Reference) CN)
-        (field (name Value) CONN_WHITE_5))
-      (pins
-        (pin (num 1) (name P1) (type passive))
-        (pin (num 2) (name P2) (type passive))
-        (pin (num 3) (name P3) (type passive))
-        (pin (num 4) (name P4) (type passive))
-        (pin (num 5) (name P5) (type passive))))
-    (libpart (lib user_conn) (part DF3_UART)
-      (fields
-        (field (name Reference) U)
-        (field (name Value) DF3_UART))
-      (pins
-        (pin (num 1) (name VCC) (type input))
-        (pin (num 2) (name GND) (type input))
-        (pin (num 3) (name TX) (type input))
-        (pin (num 4) (name RX) (type input))))
-    (libpart (lib user_regul) (part TA48M05F)
-      (fields
-        (field (name Reference) U)
-        (field (name Value) TA48M05F))
-      (pins
-        (pin (num 1) (name IN) (type power_in))
-        (pin (num 2) (name OUT) (type power_out))
-        (pin (num 3) (name GND) (type passive))))
-    (libpart (lib user_IC) (part NJM2360A)
-      (fields
-        (field (name Reference) U)
-        (field (name Value) NJM2360A))
-      (pins
-        (pin (num 1) (name Cs) (type input))
-        (pin (num 2) (name Es) (type input))
-        (pin (num 3) (name Ct) (type input))
-        (pin (num 4) (name GND) (type input))
-        (pin (num 5) (name INV) (type input))
-        (pin (num 6) (name V+) (type input))
-        (pin (num 7) (name Si) (type input))
-        (pin (num 8) (name Cd) (type input))))
-    (libpart (lib RoboKUT_conn) (part DF22L-2P)
-      (description "HIROSE DF22 RED 2P")
-      (fields
-        (field (name Reference) CN)
-        (field (name Value) DF22L-2P))
-      (pins
-        (pin (num 1) (name Vi+) (type power_out))
-        (pin (num 2) (name Vi-) (type power_out))))
     (libpart (lib user_SW) (part SLIDE_SW)
       (fields
         (field (name Reference) SW)
@@ -676,6 +528,35 @@
         (pin (num 98) (name P2[3]) (type BiDi))
         (pin (num 99) (name P2[4]) (type BiDi))
         (pin (num 100) (name VDDIO2) (type power_in))))
+    (libpart (lib user_regul) (part TA48M05F)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) TA48M05F))
+      (pins
+        (pin (num 1) (name IN) (type power_in))
+        (pin (num 2) (name OUT) (type power_out))
+        (pin (num 3) (name GND) (type passive))))
+    (libpart (lib RoboKUT_conn) (part DF22L-2P)
+      (description "HIROSE DF22 RED 2P")
+      (fields
+        (field (name Reference) CN)
+        (field (name Value) DF22L-2P))
+      (pins
+        (pin (num 1) (name Vi+) (type power_out))
+        (pin (num 2) (name Vi-) (type power_out))))
+    (libpart (lib user_IC) (part NJM2360A)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) NJM2360A))
+      (pins
+        (pin (num 1) (name Cs) (type input))
+        (pin (num 2) (name Es) (type input))
+        (pin (num 3) (name Ct) (type input))
+        (pin (num 4) (name GND) (type input))
+        (pin (num 5) (name INV) (type input))
+        (pin (num 6) (name V+) (type input))
+        (pin (num 7) (name Si) (type input))
+        (pin (num 8) (name Cd) (type input))))
     (libpart (lib RoboKUT_conn) (part DF22R-2P)
       (description "HIROSE DF22 BLACK 2P")
       (fields
@@ -689,12 +570,129 @@
         (field (name Reference) U)
         (field (name Value) drill_3mm))
       (pins
-        (pin (num ~) (name ~) (type input)))))
+        (pin (num ~) (name ~) (type input))))
+    (libpart (lib HubBoard-rescue) (part CP1-RESCUE-HubBoard)
+      (footprints
+        (fp CP*)
+        (fp SM*))
+      (fields
+        (field (name Reference) C)
+        (field (name Value) CP1-RESCUE-HubBoard))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib HubBoard-rescue) (part C-RESCUE-HubBoard)
+      (footprints
+        (fp SM*)
+        (fp C?)
+        (fp C1-1))
+      (fields
+        (field (name Reference) C)
+        (field (name Value) C-RESCUE-HubBoard))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib HubBoard-rescue) (part R-RESCUE-HubBoard)
+      (footprints
+        (fp R?)
+        (fp SM0603)
+        (fp SM0805)
+        (fp R?-*)
+        (fp SM1206))
+      (fields
+        (field (name Reference) R)
+        (field (name Value) R-RESCUE-HubBoard))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part Crystal)
+      (description "Two pin crystal")
+      (footprints
+        (fp Crystal_*))
+      (fields
+        (field (name Reference) Y)
+        (field (name Value) Crystal))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))))
+    (libpart (lib device) (part D)
+      (description Diode)
+      (footprints
+        (fp Diode_*)
+        (fp D-Pak_TO252AA)
+        (fp *SingleDiode)
+        (fp *_Diode_*)
+        (fp *SingleDiode*))
+      (fields
+        (field (name Reference) D)
+        (field (name Value) D))
+      (pins
+        (pin (num 1) (name K) (type passive))
+        (pin (num 2) (name A) (type passive))))
+    (libpart (lib device) (part LED)
+      (footprints
+        (fp LED-3MM)
+        (fp LED-5MM)
+        (fp LED-10MM)
+        (fp LED-0603)
+        (fp LED-0805)
+        (fp LED-1206)
+        (fp LEDV))
+      (fields
+        (field (name Reference) D)
+        (field (name Value) LED))
+      (pins
+        (pin (num 1) (name K) (type passive))
+        (pin (num 2) (name A) (type passive))))
+    (libpart (lib device) (part INDUCTOR)
+      (fields
+        (field (name Reference) L)
+        (field (name Value) INDUCTOR))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))))
+    (libpart (lib user_conn) (part CONN_WHITE_5)
+      (description "Molex, KKseries")
+      (fields
+        (field (name Reference) CN)
+        (field (name Value) CONN_WHITE_5))
+      (pins
+        (pin (num 1) (name P1) (type passive))
+        (pin (num 2) (name P2) (type passive))
+        (pin (num 3) (name P3) (type passive))
+        (pin (num 4) (name P4) (type passive))
+        (pin (num 5) (name P5) (type passive))))
+    (libpart (lib user_conn) (part DF3_UART)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) DF3_UART))
+      (pins
+        (pin (num 1) (name VCC) (type input))
+        (pin (num 2) (name GND) (type input))
+        (pin (num 3) (name TX) (type input))
+        (pin (num 4) (name RX) (type input))))
+    (libpart (lib user_conn) (part CONN_WHITE_3)
+      (description "Molex, KKseries, Power")
+      (fields
+        (field (name Reference) CN)
+        (field (name Value) CONN_WHITE_3))
+      (pins
+        (pin (num 1) (name P1) (type passive))
+        (pin (num 2) (name P2) (type passive))
+        (pin (num 3) (name P3) (type passive))))
+    (libpart (lib user_communication) (part Mini-B)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) Mini-B))
+      (pins
+        (pin (num 1) (name Vbus) (type input))
+        (pin (num 2) (name D-) (type input))
+        (pin (num 3) (name D+) (type input))
+        (pin (num 4) (name NC) (type input))
+        (pin (num 5) (name GND) (type input)))))
   (libraries
     (library (logical HubBoard-rescue)
       (uri C:\Users\Matuda_Kazuaki\Documents\GitHub\RobotClubRepeat\KiCAD\HubBoard\HubBoard-rescue.lib))
-    (library (logical device)
-      (uri "C:\\Program Files\\KiCad\\share\\kicad\\library\\device.lib"))
     (library (logical HubBoard-cache)
       (uri C:\Users\Matuda_Kazuaki\Documents\GitHub\RobotClubRepeat\KiCAD\HubBoard\HubBoard-cache.lib))
     (library (logical user_communication)
@@ -707,10 +705,12 @@
       (uri C:\Users\Matuda_Kazuaki\Dropbox\基盤班\基盤データ・回路図\kicad\Librarys\lib_cmp\user_SW.lib))
     (library (logical user_regul)
       (uri C:\Users\Matuda_Kazuaki\Dropbox\基盤班\基盤データ・回路図\kicad\Librarys\lib_cmp\user_regul.lib))
+    (library (logical user_μC)
+      (uri C:\Users\Matuda_Kazuaki\Dropbox\基盤班\基盤データ・回路図\kicad\Librarys\lib_cmp\user_μC.lib))
     (library (logical RoboKUT_conn)
       (uri C:\Users\Matuda_Kazuaki\Documents\GitHub\KiCadComponents\RoboKUT_conn.lib))
-    (library (logical user_μC)
-      (uri C:\Users\Matuda_Kazuaki\Dropbox\基盤班\基盤データ・回路図\kicad\Librarys\lib_cmp\user_μC.lib)))
+    (library (logical device)
+      (uri "C:\\Program Files\\KiCad\\share\\kicad\\library\\device.lib")))
   (nets
     (net (code 1) (name "Net-(U8-Pad3)")
       (node (ref U8) (pin 3)))
