@@ -1972,7 +1972,7 @@ U 1 1 55A68DA0
 P 13900 9500
 F 0 "U9" H 13900 9800 60  0000 C CNN
 F 1 "drill_3mm" H 13900 9150 60  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_single_1-5mmDrill" H 13900 9500 60  0001 C CNN
+F 2 "user_Passive:dril_3mm" H 13900 9500 60  0001 C CNN
 F 3 "" H 13900 9500 60  0000 C CNN
 	1    13900 9500
 	1    0    0    -1  
@@ -1983,7 +1983,7 @@ U 1 1 55A69247
 P 14450 9500
 F 0 "U11" H 14450 9800 60  0000 C CNN
 F 1 "drill_3mm" H 14450 9150 60  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_single_1-5mmDrill" H 14450 9500 60  0001 C CNN
+F 2 "user_Passive:dril_3mm" H 14450 9500 60  0001 C CNN
 F 3 "" H 14450 9500 60  0000 C CNN
 	1    14450 9500
 	1    0    0    -1  
@@ -1994,7 +1994,7 @@ U 1 1 55A692CA
 P 15000 9500
 F 0 "U12" H 15000 9800 60  0000 C CNN
 F 1 "drill_3mm" H 15000 9150 60  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_single_1-5mmDrill" H 15000 9500 60  0001 C CNN
+F 2 "user_Passive:dril_3mm" H 15000 9500 60  0001 C CNN
 F 3 "" H 15000 9500 60  0000 C CNN
 	1    15000 9500
 	1    0    0    -1  
@@ -2005,7 +2005,7 @@ U 1 1 55A6936B
 P 15550 9500
 F 0 "U13" H 15550 9800 60  0000 C CNN
 F 1 "drill_3mm" H 15550 9150 60  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_single_1-5mmDrill" H 15550 9500 60  0001 C CNN
+F 2 "user_Passive:dril_3mm" H 15550 9500 60  0001 C CNN
 F 3 "" H 15550 9500 60  0000 C CNN
 	1    15550 9500
 	1    0    0    -1  
