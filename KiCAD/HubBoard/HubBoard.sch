@@ -2297,4 +2297,6 @@ $EndComp
 Wire Wire Line
 	7050 1000 7050 1050
 Connection ~ 7050 1050
+NoConn ~ 4100 2650
+NoConn ~ 4100 2550
 $EndSCHEMATC

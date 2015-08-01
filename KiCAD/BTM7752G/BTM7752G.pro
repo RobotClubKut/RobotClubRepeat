@@ -1,4 +1,4 @@
-update=2015/07/31 0:36:01
+update=2015/08/01 19:54:07
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,6 +25,16 @@ version=1
 NetIExt=net
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
 [eeschema]
 version=1
 LibDir=library
@@ -116,3 +126,4 @@ LibName84=library/user_sensor
 LibName85=library/user_special
 LibName86=library/user_SW
 LibName87=library/user_μC
+LibName88=library/user_drill
