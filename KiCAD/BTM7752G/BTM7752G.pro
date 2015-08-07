@@ -1,4 +1,4 @@
-update=2015/08/01 19:54:07
+update=2015/08/03 13:14:52
 version=1
 last_client=kicad
 [pcbnew]
@@ -127,3 +127,13 @@ LibName85=library/user_special
 LibName86=library/user_SW
 LibName87=library/user_μC
 LibName88=library/user_drill
+LibName89=library/RoboKUT_communication
+LibName90=library/RoboKUT_conn
+LibName91=library/RoboKUT_conn_KRP
+LibName92=library/RoboKUT_IC
+LibName93=library/RoboKUT_Passive
+LibName94=library/RoboKUT_regul
+LibName95=library/RoboKUT_sensor
+LibName96=library/RoboKUT_special
+LibName97=library/RoboKUT_SW
+LibName98=library/RoboKUT_uC
