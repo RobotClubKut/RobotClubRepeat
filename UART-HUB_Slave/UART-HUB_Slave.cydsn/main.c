@@ -16,6 +16,9 @@
 
 int main()
 {
+    uint8 rxdata[64];
+    uint8 length;
+    
     CyGlobalIntEnable; /* Enable global interrupts. */
 	SPIS_HUB_Init();
 	#ifndef NO_UART
@@ -27,7 +30,10 @@ int main()
 
     for(;;)
     {
-		
+		if(SPIS_HUB_GetRxBuffer(rxdata,&length) == CYRET_SUCCESS)
+        {
+            SPIS_HUB_SetTxBuffer(rxdata,length);
+        }
     }
 }
 
