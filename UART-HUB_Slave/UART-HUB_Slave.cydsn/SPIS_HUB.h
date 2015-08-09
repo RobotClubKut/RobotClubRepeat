@@ -15,13 +15,14 @@
 
 enum spisRxStatus 
 {
-	SPIS_RX_SEND_DATA	
+	SPIS_HUB_STS_RX_FIFO_FULL,	
+	SPIS_HUB_STS_RX_FIFO_EMPTY
 };
 	
 enum spisTxStatus 
 {
-	SPIS_HUB_STS_FIFO_FULL,	
-	SPIS_HUB_STS_FIFO_EMPTY
+	SPIS_HUB_STS_TX_FIFO_FULL,	
+	SPIS_HUB_STS_TX_FIFO_EMPTY
 };
 enum spisIntStage
 {
@@ -46,7 +47,7 @@ enum ASCII
 CY_ISR_PROT(spis_rx_interrupt);
 void SPIS_HUB_Init(void);
 cystatus SPIS_HUB_SetTxBuffer(uint8*,uint16);
-cystatus SPIS_HUB_SetTxBuffer(uint8*,uint16);
+cystatus SPIS_HUB_GetRxBuffer(uint8*,uint8*);
 enum spisRxStatus SPIS_HUB_ReadRxStatus(void);
 enum spisTxStatus SPIS_HUB_ReadTxStatus(void);
 
