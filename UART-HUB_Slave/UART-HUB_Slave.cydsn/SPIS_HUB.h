@@ -43,7 +43,8 @@ enum ASCII
 	SYN = 0x16,
 	ETB = 0x17,
 	CAN = 0x18
-}
+};
+
 CY_ISR_PROT(spis_rx_interrupt);
 void SPIS_HUB_Init(void);
 cystatus SPIS_HUB_SetTxBuffer(uint8*,uint16);

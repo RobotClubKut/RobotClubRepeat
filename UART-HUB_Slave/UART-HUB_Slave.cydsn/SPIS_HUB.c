@@ -33,6 +33,7 @@ volatile uint8 g_spisRxCount;
 
 CY_ISR(spis_rx_interrupt)
 {
+	uint8 i;
 	uint8 getData = SPIS_ReadByte();
     if(g_spisIntStage == SPIS_HUB_STAGE_NONE)
     {
@@ -46,6 +47,11 @@ CY_ISR(spis_rx_interrupt)
 		// receive
 		if(getData == SOH)
 		{
+			
+    		SPIS_ClearRxBuffer();
+			SPIS_ClearTxBuffer();
+    		SPIS_ClearFIFO();
+			
 			if(g_spisRxReceiveStatus == CYRET_STARTED)
 			{
 				SPIS_PutArray(SYNC_ACK,sizeof(SYNC_ACK));
@@ -57,6 +63,7 @@ CY_ISR(spis_rx_interrupt)
 			{
 				SPIS_PutArray(SYNC_NAK,sizeof(SYNC_NAK));
                 g_spisIntStage = SPIS_HUB_STAGE_NONE;
+				g_spisRxReceiveStatus = CYRET_FINISHED;
 			}
 		}
 		// trans
@@ -64,7 +71,7 @@ CY_ISR(spis_rx_interrupt)
 		{
 			if(g_spisTxTransStatus == CYRET_STARTED)
 			{
-				SPIS_PutArray(SYNC_ACK,sizeof(SYNC_ACK));
+				SPIS_PutArray(SYNC_ACK,sizeof(SYNC_ACK)-1);
                 SPIS_WriteTxData(g_spisTxLength);
                 SPIS_PutArray(g_spisTxBuffer,g_spisTxLength);
                 SPIS_PutArray(END_ETB,sizeof(END_ETB));
@@ -75,49 +82,68 @@ CY_ISR(spis_rx_interrupt)
 			{
 				SPIS_PutArray(SYNC_NAK,sizeof(SYNC_NAK));
                 g_spisIntStage = SPIS_HUB_STAGE_NONE;
+				g_spisTxTransStatus = CYRET_FINISHED;
 			}
 		}
 	}
 	else if(g_spisIntStage == SPIS_HUB_STAGE_READ_DATA)
 	{
-        SPIS_WriteTxData(0);
-		if((getData != SOH) && (g_spisRxLength == 0))
+		if(getData == SOH)
+		{
+			
+		}
+		else if((getData != SOH) && (g_spisRxLength == 0))
         {
             g_spisRxLength = getData;
+			for(i = 0;i < g_spisRxLength+1;i++)
+			{
+				SPIS_WriteTxData(0);
+			}
         }
-        else
+        else if(g_spisRxLength != 0)
         {
-            g_spisRxBuffer[g_spisRxCount] = getData;
+			//SPIS_WriteTxData(0);
             if(g_spisRxCount < g_spisRxLength)
             {
+				g_spisRxBuffer[g_spisRxCount] = getData;
                 g_spisRxCount++;
             }
             else
             {
-                g_spisIntStage = SPIS_HUB_STAGE_READ_END;
+				if(getData == ETB)
+		        {
+		            // sumcheck
+		            
+					SPIS_WriteTxData(EOT);
+		        }
+		        else
+		        {
+					SPIS_WriteTxData(CAN);
+		            // errar status
+		        }
+				while(!(SPIS_ReadTxStatus()&SPIS_STS_TX_FIFO_EMPTY));
+				SPIS_ClearTxBuffer();
+		   		SPIS_ClearRxBuffer();
+		  		SPIS_ClearFIFO();
+		        g_spisRxReceiveStatus = CYRET_FINISHED;
+		        g_spisIntStage = SPIS_HUB_STAGE_NONE;
             }
         }
 	}
-	else if(g_spisIntStage == SPIS_HUB_STAGE_READ_END)
-	{
-		if(getData == ETB)
-        {
-            // sumcheck
-            SPIS_WriteTxData(EOT);
-        }
-        else
-        {
-            // errar status
-        }
-        g_spisRxReceiveStatus = CYRET_FINISHED;
-        g_spisIntStage = SPIS_HUB_STAGE_NONE;
-	}
+
     else if(g_spisIntStage == SPIS_HUB_STAGE_WRITE_END)
     {
+		
         if(g_spisTxCount < g_spisTxLength+4)
         {
             g_spisTxCount++;
         }
+		/*
+		if((getData == 0) || (getData == ENQ))
+		{
+			
+		}
+		*/
         else
         {
             if(getData == EOT)
@@ -132,6 +158,10 @@ CY_ISR(spis_rx_interrupt)
             {
                 //error
             }
+			SPIS_ClearRxBuffer();
+			SPIS_ClearTxBuffer();
+    		SPIS_ClearFIFO();
+			
             g_spisIntStage = SPIS_HUB_STAGE_NONE;
             g_spisTxTransStatus = CYRET_FINISHED;
         }
@@ -146,14 +176,16 @@ void SPIS_HUB_Init()
     g_spisRxReceiveStatus = CYRET_STARTED;
     g_spisTxTransStatus = CYRET_FINISHED;
 	SPIS_Start();
-	SPIS_EnableRxInt();
+	SPIS_EnableTxInt();
+	SPIS_ClearTxBuffer();
+    SPIS_ClearRxBuffer();
+    SPIS_ClearFIFO();
 	SPIS_rx_isr_StartEx(spis_rx_interrupt);
 }
 
 cystatus SPIS_HUB_SetTxBuffer(uint8* txData,uint16 length)
 {
-	if((g_spisTxTransStatus != CYRET_FINISHED)
-		|| (g_spisRxReceiveStatus != CYRET_FINISHED)){
+	if(g_spisTxTransStatus == CYRET_STARTED){
 		return CYRET_STARTED;
 	}
 	if((txData == NULL) 
@@ -162,7 +194,7 @@ cystatus SPIS_HUB_SetTxBuffer(uint8* txData,uint16 length)
 	}
 	SPIS_ClearTxBuffer();
     SPIS_ClearRxBuffer();
-    //SPIS_ClearFIFO();
+    SPIS_ClearFIFO();
     
     g_spisTxLength = length;
 	strncpy(g_spisTxBuffer,txData,length);
@@ -183,10 +215,12 @@ cystatus SPIS_HUB_GetRxBuffer(uint8* rxData,uint8* length)
 	}
     *length = g_spisRxLength;
     strncpy(rxData,g_spisRxBuffer,g_spisRxLength);
-    
+    SPIS_ClearTxBuffer();
+    SPIS_ClearRxBuffer();
+    SPIS_ClearFIFO();
     g_spisRxReceiveStatus = CYRET_STARTED;
 	g_spisRxStatus = SPIS_HUB_STS_RX_FIFO_EMPTY;
-    g_spisIntStage = SPIS_HUB_STAGE_NONE;
+    g_spisIntStage = SPIS_HUB_STAGE_SYNC;
     return CYRET_SUCCESS;
 }
 
