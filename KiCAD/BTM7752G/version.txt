@@ -1,0 +1,12 @@
+Application: kicad
+Version: (2015-07-11 BZR 5925, Git c291b88)-product release build
+wxWidgets: Version 3.0.2 (debug,wchar_t,compiler with C++ ABI 1002,GCC 4.9.2,wx containers,compatible with 2.8)
+Platform: Windows 8 (build 9200), 64-bit edition, 64 bit, Little endian, wxMSW
+Boost version: 1.57.0
+         USE_WX_GRAPHICS_CONTEXT=OFF
+         USE_WX_OVERLAY=OFF
+         KICAD_SCRIPTING=ON
+         KICAD_SCRIPTING_MODULES=ON
+         KICAD_SCRIPTING_WXPYTHON=ON
+         USE_FP_LIB_TABLE=HARD_CODED_ON
+         BUILD_GITHUB_PLUGIN=ON
