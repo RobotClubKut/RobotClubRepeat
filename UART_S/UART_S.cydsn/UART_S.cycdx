@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
+  <block name="isr_tx_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_rx_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_tx_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_break_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Tx_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="DMA_TX_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Tx_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="LED_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="DMA_RX_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Tx_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_break_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Rx_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="UART_0" BASE="0x0" SIZE="0x0" desc="UART" visible="true">
+    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <register name="RX_UART_0_RX_ADDRESS1" address="0x6427" bitWidth="8" desc="RX Address1 Register" />
+    <register name="RX_UART_0_RX_ADDRESS2" address="0x6437" bitWidth="8" desc="RX Address2 Register" />
+    <register name="RX_UART_0_RX_DATA" address="0x6447" bitWidth="8" desc="RX Data Register" />
+    <register name="RX_UART_0_RX_STATUS" address="0x6467" bitWidth="8" desc="RX status register">
+      <field name="UART_0_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="UART_0_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="UART_0_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="UART_0_RX_STS_STOP_ERROR" from="3" to="3" access="R" resetVal="" desc="" />
+      <field name="UART_0_RX_STS_OVERRUN" from="4" to="4" access="R" resetVal="" desc="" />
+      <field name="UART_0_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
+      <field name="UART_0_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
+    </register>
+    <register name="TX_UART_0_TX_DATA" address="0x6549" bitWidth="8" desc="TX Data Register" />
+    <register name="TX_UART_0_TX_STATUS" address="0x6569" bitWidth="8" desc="TX status register">
+      <field name="UART_0_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="UART_0_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="UART_0_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="UART_0_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
+    </register>
+  </block>
+  <block name="isr_tx_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_break_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="DMA_RX_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_rx_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="DMA_RX_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="LED_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="isr_rx_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="LED_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="UART_2" BASE="0x0" SIZE="0x0" desc="UART" visible="true">
+    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <register name="RX_UART_2_RX_ADDRESS1" address="0x6420" bitWidth="8" desc="RX Address1 Register" />
+    <register name="RX_UART_2_RX_ADDRESS2" address="0x6430" bitWidth="8" desc="RX Address2 Register" />
+    <register name="RX_UART_2_RX_DATA" address="0x6440" bitWidth="8" desc="RX Data Register" />
+    <register name="TX_UART_2_TX_DATA" address="0x644C" bitWidth="8" desc="TX Data Register" />
+    <register name="RX_UART_2_RX_STATUS" address="0x6463" bitWidth="8" desc="RX status register">
+      <field name="UART_2_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="UART_2_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="UART_2_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="UART_2_RX_STS_STOP_ERROR" from="3" to="3" access="R" resetVal="" desc="" />
+      <field name="UART_2_RX_STS_OVERRUN" from="4" to="4" access="R" resetVal="" desc="" />
+      <field name="UART_2_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
+      <field name="UART_2_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
+    </register>
+    <register name="TX_UART_2_TX_STATUS" address="0x646C" bitWidth="8" desc="TX status register">
+      <field name="UART_2_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="UART_2_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="UART_2_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="UART_2_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
+    </register>
+  </block>
+  <block name="Rx_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="UART_1" BASE="0x0" SIZE="0x0" desc="UART" visible="true">
+    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+    <register name="TX_UART_1_TX_DATA" address="0x644A" bitWidth="8" desc="TX Data Register" />
+    <register name="TX_UART_1_TX_STATUS" address="0x6469" bitWidth="8" desc="TX status register">
+      <field name="UART_1_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="UART_1_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="UART_1_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="UART_1_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
+    </register>
+    <register name="RX_UART_1_RX_ADDRESS1" address="0x6527" bitWidth="8" desc="RX Address1 Register" />
+    <register name="RX_UART_1_RX_ADDRESS2" address="0x6537" bitWidth="8" desc="RX Address2 Register" />
+    <register name="RX_UART_1_RX_DATA" address="0x6547" bitWidth="8" desc="RX Data Register" />
+    <register name="RX_UART_1_RX_STATUS" address="0x6567" bitWidth="8" desc="RX status register">
+      <field name="UART_1_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="UART_1_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="UART_1_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="UART_1_RX_STS_STOP_ERROR" from="3" to="3" access="R" resetVal="" desc="" />
+      <field name="UART_1_RX_STS_OVERRUN" from="4" to="4" access="R" resetVal="" desc="" />
+      <field name="UART_1_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
+      <field name="UART_1_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
+    </register>
+  </block>
+  <block name="DMA_TX_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="DMA_TX_0" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="Rx_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+</blockRegMap>
