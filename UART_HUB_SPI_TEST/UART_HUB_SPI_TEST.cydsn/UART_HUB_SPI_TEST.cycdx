@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
-  <block name="cy_constant_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="cy_constant_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="DMA_SPIM_TX" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" />
+  <block name="cy_constant_1" BASE="0x0" SIZE="0x0" desc="" visible="true" />
   <block name="SPIM" BASE="0x0" SIZE="0x0" desc="" visible="true">
     <block name="VirtualMux_2" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <block name="VirtualMux_3" BASE="0x0" SIZE="0x0" desc="" visible="true" />
@@ -19,14 +20,14 @@
     <block name="BSPIS" BASE="0x0" SIZE="0x0" desc="" visible="true" />
     <register name="SPIS_RX_DATA" address="0x6406" bitWidth="8" desc="SPIS RX Data" />
     <register name="SPIS_TX_DATA" address="0x6406" bitWidth="8" desc="SPIS TX Data" />
-    <register name="SPIS_RXSTATUS" address="0x6466" bitWidth="8" desc="SPIS RX Status Register">
+    <register name="SPIS_RXSTATUS" address="0x6467" bitWidth="8" desc="SPIS RX Status Register">
       <field name="RX_FIFO_Not_Empty" from="3" to="3" access="R" resetVal="" desc="Set when the RX Data FIFO is not empty. That is, at least one byte/word is in the RX FIFO" />
       <field name="RX_FIFO_Empty" from="4" to="4" access="R" resetVal="" desc="Set when the RX Data FIFO is empty" />
       <field name="RX_Buf_Overrun" from="5" to="5" access="R" resetVal="" desc="Set when RX Data has overrun the 4 byte/word FIFO without being moved to the RX buffer                           cmemory array (if one exists)" />
       <field name="RX_FIFO_Full" from="6" to="6" access="R" resetVal="" desc="Set when the RX Data FIFO is full" />
       <field name="Interrupt" from="7" to="7" access="R" resetVal="" desc="Set when interrupt occurs" />
     </register>
-    <register name="SPIS_TXSTATUS" address="0x6566" bitWidth="8" desc="SPIS TX Status Register">
+    <register name="SPIS_TXSTATUS" address="0x6567" bitWidth="8" desc="SPIS TX Status Register">
       <field name="SPI_Done" from="0" to="0" access="R" resetVal="" desc="Set when all of the data in the transmit FIFO has been sent. Set when Byte/Word Complete                           has been set and TX Data FIFO is empty" />
       <field name="TX_FIFO_Not_Full" from="1" to="1" access="R" resetVal="" desc="Set when the TX Data FIFO is not full" />
       <field name="TX_FIFO_Empty" from="2" to="2" access="R" resetVal="" desc="Set when the TX Data FIFO is empty" />
