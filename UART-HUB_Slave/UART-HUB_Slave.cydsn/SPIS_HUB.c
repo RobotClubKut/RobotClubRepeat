@@ -185,7 +185,7 @@ void SPIS_HUB_Init()
 
 cystatus SPIS_HUB_SetTxBuffer(uint8* txData,uint16 length)
 {
-	if(g_spisTxTransStatus == CYRET_STARTED){
+	if((g_spisTxTransStatus == CYRET_STARTED) || (g_spisRxReceiveStatus == CYRET_STARTED)){
 		return CYRET_STARTED;
 	}
 	if((txData == NULL) 
@@ -206,7 +206,7 @@ cystatus SPIS_HUB_SetTxBuffer(uint8* txData,uint16 length)
 
 cystatus SPIS_HUB_GetRxBuffer(uint8* rxData,uint8* length)
 {
-	if(g_spisRxReceiveStatus != CYRET_FINISHED){
+	if((g_spisTxTransStatus == CYRET_STARTED) || (g_spisRxReceiveStatus == CYRET_STARTED)){
 		return CYRET_STARTED;
 	}
 	if((rxData == NULL) 
