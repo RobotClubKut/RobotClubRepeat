@@ -27,9 +27,9 @@ int main()
 {
     PS2Controller psData;
     char str[20];
-    uint8 debug_val1,debug_val2;
-    uint16 motor_speed;
+    uint8 debug_val1;
     enum machine_state air_state;
+    uint8 PutData[3] = {0xaa,0xff,0x55};
     
     CyGlobalIntEnable; /* Enable global interrupts. */
     PS2_Start();
@@ -56,11 +56,11 @@ while(1)
         
         /*air_state*/
         if(air_state == default_state){
-                
+            LIN_Master_PutArray(0x02,1,PutData);
         }else if(air_state == first_state){
-        
+            LIN_Master_PutArray(0x02,1,PutData+1);
         }else if(air_state == second_state){
-        
+            LIN_Master_PutArray(0x02,1,PutData+2);
         }else{
         
         }
@@ -70,7 +70,7 @@ while(1)
             debug_val1 = air_state;
             sprintf(str,"air_state = %d\n",(int)air_state);
             Debug_PutString(str);
-        }
+        }        
     }
 }
 
