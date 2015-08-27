@@ -1,0 +1,533 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:74xgxx
+LIBS:ac-dc
+LIBS:actel
+LIBS:Altera
+LIBS:analog_devices
+LIBS:brooktre
+LIBS:cmos_ieee
+LIBS:dc-dc
+LIBS:diode
+LIBS:elec-unifil
+LIBS:ESD_Protection
+LIBS:ftdi
+LIBS:gennum
+LIBS:graphic
+LIBS:hc11
+LIBS:ir
+LIBS:Lattice
+LIBS:logo
+LIBS:maxim
+LIBS:microchip_dspic33dsc
+LIBS:microchip_pic10mcu
+LIBS:microchip_pic12mcu
+LIBS:microchip_pic16mcu
+LIBS:microchip_pic18mcu
+LIBS:microchip_pic32mcu
+LIBS:motor_drivers
+LIBS:msp430
+LIBS:nordicsemi
+LIBS:nxp_armmcu
+LIBS:onsemi
+LIBS:Oscillators
+LIBS:Power_Management
+LIBS:powerint
+LIBS:pspice
+LIBS:references
+LIBS:relays
+LIBS:rfcom
+LIBS:RoboKUT_communication
+LIBS:RoboKUT_conn
+LIBS:RoboKUT_conn_KRP
+LIBS:RoboKUT_IC
+LIBS:RoboKUT_Passive
+LIBS:RoboKUT_regul
+LIBS:RoboKUT_sensor
+LIBS:RoboKUT_special
+LIBS:RoboKUT_SW
+LIBS:RoboKUT_uC
+LIBS:sensors
+LIBS:silabs
+LIBS:stm8
+LIBS:stm32
+LIBS:supertex
+LIBS:switches
+LIBS:transf
+LIBS:ttl_ieee
+LIBS:user_communication
+LIBS:user_conn
+LIBS:user_conn_KRP
+LIBS:user_drill
+LIBS:user_IC
+LIBS:user_Passive
+LIBS:user_regul
+LIBS:user_sensor
+LIBS:user_special
+LIBS:user_SW
+LIBS:user_μC
+LIBS:video
+LIBS:Xicor
+LIBS:Zilog
+LIBS:Symbols_DCDC-ACDC-Converter_RevC_20Jul2012
+LIBS:Symbols_EN60617_13Mar2013
+LIBS:Symbols_EN60617-10_HF-Radio_DRAFT_12Sep2013
+LIBS:Symbols_ICs-Diskrete_RevD10
+LIBS:Symbols_ICs-Opto_RevB_16Sep2013
+LIBS:Symbols_Microcontroller_Philips-NXP_RevA_06Oct2013
+LIBS:Symbols_Socket-DIN41612_RevA
+LIBS:Symbols_Transformer-Diskrete_RevA
+LIBS:SymbolsSimilarEN60617+oldDIN617-RevE8
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CY8C4245PVI-482 U1
+U 1 1 55CF5782
+P 6400 4500
+F 0 "U1" H 6350 3500 60  0000 C CNN
+F 1 "CY8C4245PVI-482" H 6400 3650 60  0000 C CNN
+F 2 "Housings_SSOP:SSOP-28_5.3x10.2mm_Pitch0.65mm" H 6800 4550 60  0001 C CNN
+F 3 "" H 6800 4550 60  0000 C CNN
+	1    6400 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_WHITE_5 CN1
+U 1 1 55CF57E3
+P 10700 4650
+F 0 "CN1" H 10700 4875 60  0000 C CNN
+F 1 "CONN_WHITE_5" H 10700 4225 60  0000 C CNN
+F 2 "user_conn:DF1E-5P_Streight" H 10700 4650 60  0001 C CNN
+F 3 "" H 10700 4650 60  0000 C CNN
+	1    10700 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L +5V #PWR01
+U 1 1 55CF5848
+P 10250 4950
+F 0 "#PWR01" H 10250 4800 50  0001 C CNN
+F 1 "+5V" H 10200 5100 50  0000 C CNN
+F 2 "" H 10250 4950 60  0000 C CNN
+F 3 "" H 10250 4950 60  0000 C CNN
+	1    10250 4950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR02
+U 1 1 55CF588A
+P 10250 4850
+F 0 "#PWR02" H 10250 4600 50  0001 C CNN
+F 1 "GND" H 10250 4700 50  0000 C CNN
+F 2 "" H 10250 4850 60  0000 C CNN
+F 3 "" H 10250 4850 60  0000 C CNN
+	1    10250 4850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	10250 4950 10450 4950
+Wire Wire Line
+	10250 4850 10450 4850
+Text GLabel 10050 4750 0    60   Input ~ 0
+XRES
+Text GLabel 10050 4650 0    60   Input ~ 0
+SWDCK
+Text GLabel 10050 4550 0    60   Input ~ 0
+SWDIO
+Wire Wire Line
+	10050 4750 10450 4750
+Wire Wire Line
+	10050 4650 10450 4650
+Wire Wire Line
+	10050 4550 10450 4550
+Text GLabel 7650 4100 2    60   Input ~ 0
+XRES
+Text GLabel 4950 5100 0    60   Input ~ 0
+SWDCK
+Text GLabel 4950 5000 0    60   Input ~ 0
+SWDIO
+$Comp
+L GND #PWR03
+U 1 1 55CF5A0D
+P 8900 4500
+F 0 "#PWR03" H 8900 4250 50  0001 C CNN
+F 1 "GND" H 8900 4350 50  0000 C CNN
+F 2 "" H 8900 4500 60  0000 C CNN
+F 3 "" H 8900 4500 60  0000 C CNN
+	1    8900 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 3800 8900 3800
+$Comp
+L +5V #PWR04
+U 1 1 55CF5A48
+P 7800 3750
+F 0 "#PWR04" H 7800 3600 50  0001 C CNN
+F 1 "+5V" H 7800 3890 50  0000 C CNN
+F 2 "" H 7800 3750 60  0000 C CNN
+F 3 "" H 7800 3750 60  0000 C CNN
+	1    7800 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 3900 8600 3900
+Wire Wire Line
+	7800 3900 7800 3750
+$Comp
+L C C1
+U 1 1 55CF5A9A
+P 8050 4300
+F 0 "C1" H 8075 4400 50  0000 L CNN
+F 1 "1u" H 8075 4200 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805" H 8088 4150 30  0001 C CNN
+F 3 "" H 8050 4300 60  0000 C CNN
+	1    8050 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR05
+U 1 1 55CF5B5F
+P 8050 4500
+F 0 "#PWR05" H 8050 4250 50  0001 C CNN
+F 1 "GND" H 8050 4350 50  0000 C CNN
+F 2 "" H 8050 4500 60  0000 C CNN
+F 3 "" H 8050 4500 60  0000 C CNN
+	1    8050 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8050 4450 8050 4500
+$Comp
+L C C2
+U 1 1 55CF5BF7
+P 8300 4300
+F 0 "C2" H 8325 4400 50  0000 L CNN
+F 1 "1u" H 8325 4200 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805" H 8338 4150 30  0001 C CNN
+F 3 "" H 8300 4300 60  0000 C CNN
+	1    8300 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C3
+U 1 1 55CF5C7C
+P 8600 4300
+F 0 "C3" H 8625 4400 50  0000 L CNN
+F 1 "0.1u" H 8625 4200 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 8638 4150 30  0001 C CNN
+F 3 "" H 8600 4300 60  0000 C CNN
+	1    8600 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8300 3900 8300 4150
+Connection ~ 7800 3900
+Wire Wire Line
+	8600 3900 8600 4150
+Connection ~ 8300 3900
+$Comp
+L GND #PWR06
+U 1 1 55CF5CD3
+P 8300 4500
+F 0 "#PWR06" H 8300 4250 50  0001 C CNN
+F 1 "GND" H 8300 4350 50  0000 C CNN
+F 2 "" H 8300 4500 60  0000 C CNN
+F 3 "" H 8300 4500 60  0000 C CNN
+	1    8300 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR07
+U 1 1 55CF5D37
+P 8600 4500
+F 0 "#PWR07" H 8600 4250 50  0001 C CNN
+F 1 "GND" H 8600 4350 50  0000 C CNN
+F 2 "" H 8600 4500 60  0000 C CNN
+F 3 "" H 8600 4500 60  0000 C CNN
+	1    8600 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8300 4450 8300 4500
+Wire Wire Line
+	8600 4450 8600 4500
+Wire Wire Line
+	7600 4100 7650 4100
+Wire Wire Line
+	7600 4000 8050 4000
+Wire Wire Line
+	8050 4000 8050 4150
+Wire Wire Line
+	8900 3800 8900 4500
+Wire Wire Line
+	4950 5100 5200 5100
+Wire Wire Line
+	4950 5000 5200 5000
+$Comp
+L CNZ1023 U2
+U 1 1 55CF66FB
+P 10050 5650
+F 0 "U2" H 10050 6000 60  0000 C CNN
+F 1 "CNZ1023" H 10050 5350 60  0000 C CNN
+F 2 "user_sensor:CNZ1023" H 10050 5650 60  0001 C CNN
+F 3 "" H 10050 5650 60  0000 C CNN
+	1    10050 5650
+	1    0    0    -1  
+$EndComp
+$Comp
+L +5V #PWR08
+U 1 1 55CF6937
+P 9750 5400
+F 0 "#PWR08" H 9750 5250 50  0001 C CNN
+F 1 "+5V" H 9750 5540 50  0000 C CNN
+F 2 "" H 9750 5400 60  0000 C CNN
+F 3 "" H 9750 5400 60  0000 C CNN
+	1    9750 5400
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R1
+U 1 1 55CF6A9A
+P 9750 6000
+F 0 "R1" V 9830 6000 50  0000 C CNN
+F 1 "180" V 9750 6000 50  0000 C CNN
+F 2 "Diodes_ThroughHole:Diode_DO-41_SOD81_Vertical_AnodeUp" V 9680 6000 30  0001 C CNN
+F 3 "" H 9750 6000 30  0000 C CNN
+	1    9750 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR09
+U 1 1 55CF6ADD
+P 9750 6200
+F 0 "#PWR09" H 9750 5950 50  0001 C CNN
+F 1 "GND" H 9750 6050 50  0000 C CNN
+F 2 "" H 9750 6200 60  0000 C CNN
+F 3 "" H 9750 6200 60  0000 C CNN
+	1    9750 6200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9750 5550 9750 5400
+Wire Wire Line
+	9750 5750 9750 5850
+Wire Wire Line
+	9750 6150 9750 6200
+$Comp
+L +5V #PWR010
+U 1 1 55CF6B9D
+P 10500 5750
+F 0 "#PWR010" H 10500 5600 50  0001 C CNN
+F 1 "+5V" H 10500 5890 50  0000 C CNN
+F 2 "" H 10500 5750 60  0000 C CNN
+F 3 "" H 10500 5750 60  0000 C CNN
+	1    10500 5750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10350 5750 10500 5750
+$Comp
+L R R2
+U 1 1 55CF6C42
+P 10650 6000
+F 0 "R2" V 10730 6000 50  0000 C CNN
+F 1 "100" V 10650 6000 50  0000 C CNN
+F 2 "Diodes_ThroughHole:Diode_DO-41_SOD81_Vertical_AnodeUp" V 10580 6000 30  0001 C CNN
+F 3 "" H 10650 6000 30  0000 C CNN
+	1    10650 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10350 5550 10750 5550
+Wire Wire Line
+	10650 5550 10650 5850
+$Comp
+L GND #PWR011
+U 1 1 55CF6CD0
+P 10650 6200
+F 0 "#PWR011" H 10650 5950 50  0001 C CNN
+F 1 "GND" H 10650 6050 50  0000 C CNN
+F 2 "" H 10650 6200 60  0000 C CNN
+F 3 "" H 10650 6200 60  0000 C CNN
+	1    10650 6200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10650 6150 10650 6200
+Text GLabel 10750 5550 2    60   Input ~ 0
+SIG1
+Connection ~ 10650 5550
+Text GLabel 5200 4100 0    60   Input ~ 0
+SIG1
+$Comp
+L CONN_4_KRP P1
+U 1 1 55CF74D5
+P 10750 4000
+F 0 "P1" H 10800 3550 60  0000 C CNN
+F 1 "CONN_4_KRP" H 10800 3650 60  0000 C CNN
+F 2 "user_conn:DF1E-4P_Streight" H 10750 4000 60  0001 C CNN
+F 3 "" H 10750 4000 60  0000 C CNN
+	1    10750 4000
+	-1   0    0    1   
+$EndComp
+$Comp
+L +9V #PWR012
+U 1 1 55CF7699
+P 10250 4150
+F 0 "#PWR012" H 10250 4000 50  0001 C CNN
+F 1 "+9V" H 10200 4300 50  0000 C CNN
+F 2 "" H 10250 4150 60  0000 C CNN
+F 3 "" H 10250 4150 60  0000 C CNN
+	1    10250 4150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR013
+U 1 1 55CF776A
+P 10250 4050
+F 0 "#PWR013" H 10250 3800 50  0001 C CNN
+F 1 "GND" H 10250 3900 50  0000 C CNN
+F 2 "" H 10250 4050 60  0000 C CNN
+F 3 "" H 10250 4050 60  0000 C CNN
+	1    10250 4050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	10250 4150 10400 4150
+Wire Wire Line
+	10250 4050 10400 4050
+Text GLabel 10050 3950 0    60   Input ~ 0
+RX
+Text GLabel 10050 3850 0    60   Input ~ 0
+TX
+Wire Wire Line
+	10050 3950 10400 3950
+Wire Wire Line
+	10050 3850 10400 3850
+Text GLabel 7600 5100 2    60   Input ~ 0
+RX
+Text GLabel 7600 5000 2    60   Input ~ 0
+TX
+$Comp
+L TA48M05F U3
+U 1 1 55CFB30E
+P 10350 2850
+F 0 "U3" H 10450 2650 60  0000 C CNN
+F 1 "TA48M05F" H 10350 3000 60  0000 C CNN
+F 2 "user_conn:TO-251" H 10350 2850 60  0001 C CNN
+F 3 "" H 10350 2850 60  0000 C CNN
+	1    10350 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L C C4
+U 1 1 55CFB49F
+P 9800 3000
+F 0 "C4" H 9825 3100 50  0000 L CNN
+F 1 "0.1u" H 9825 2900 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 9838 2850 30  0001 C CNN
+F 3 "" H 9800 3000 60  0000 C CNN
+	1    9800 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L CP 47u1
+U 1 1 55CFB50A
+P 10850 3000
+F 0 "47u1" H 10875 3100 50  0000 L CNN
+F 1 "CP" H 10875 2900 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5" H 10888 2850 30  0001 C CNN
+F 3 "" H 10850 3000 60  0000 C CNN
+	1    10850 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR014
+U 1 1 55CFB543
+P 10350 3300
+F 0 "#PWR014" H 10350 3050 50  0001 C CNN
+F 1 "GND" H 10350 3150 50  0000 C CNN
+F 2 "" H 10350 3300 60  0000 C CNN
+F 3 "" H 10350 3300 60  0000 C CNN
+	1    10350 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9800 3150 9800 3250
+Wire Wire Line
+	9800 3250 10850 3250
+Wire Wire Line
+	10350 3150 10350 3300
+Connection ~ 10350 3250
+Wire Wire Line
+	10850 3250 10850 3150
+Wire Wire Line
+	9650 2850 9950 2850
+Wire Wire Line
+	10750 2850 11050 2850
+$Comp
+L +5V #PWR015
+U 1 1 55CFB8E1
+P 11050 2850
+F 0 "#PWR015" H 11050 2700 50  0001 C CNN
+F 1 "+5V" H 11050 2990 50  0000 C CNN
+F 2 "" H 11050 2850 60  0000 C CNN
+F 3 "" H 11050 2850 60  0000 C CNN
+	1    11050 2850
+	1    0    0    -1  
+$EndComp
+Connection ~ 10850 2850
+$Comp
+L +9V #PWR016
+U 1 1 55CFBAA0
+P 9650 2850
+F 0 "#PWR016" H 9650 2700 50  0001 C CNN
+F 1 "+9V" H 9650 2990 50  0000 C CNN
+F 2 "" H 9650 2850 60  0000 C CNN
+F 3 "" H 9650 2850 60  0000 C CNN
+	1    9650 2850
+	1    0    0    -1  
+$EndComp
+Connection ~ 9800 2850
+$EndSCHEMATC
