@@ -29,7 +29,7 @@ int main()
     char str[20];
     uint8 debug_val1;
     enum machine_state air_state;
-    uint8 PutData[3] = {0xaa,0xff,0x55};
+    uint8 PutData[3] = {0,1,2};
     
     CyGlobalIntEnable; /* Enable global interrupts. */
     PS2_Start();
