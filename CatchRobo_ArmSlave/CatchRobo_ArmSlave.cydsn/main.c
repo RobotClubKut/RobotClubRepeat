@@ -14,9 +14,9 @@
 
 enum machine_state
 {
-    default_state,
-    first_state,
-    second_state,
+    stop_state,
+    up_state,
+    down_state,
     end_state
 };
 
@@ -32,6 +32,8 @@ int main()
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
     Debug_Start();
     LIN_Start();
+    MOTOR_Start();
+    ENABLE_Write(1);
     
     /*デバッグ*/
     sprintf(str,"program start\n");
@@ -45,12 +47,25 @@ int main()
         }
         
         /*motor_state*/
-        if(ReceiveData == default_state){
-            status = default_state;
-        }else if(ReceiveData == first_state){
-            status = first_state;
-        }else if(ReceiveData == second_state){
-            status = second_state;
+        if(ReceiveData == stop_state){
+            MOTOR_WriteCompare1(0);
+            MOTOR_WriteCompare2(0);
+        }else if(ReceiveData == up_state){
+            if(UP_LIMIT_Read() == 0){
+                MOTOR_WriteCompare1(50);
+                MOTOR_WriteCompare2(0);
+            }else{
+                MOTOR_WriteCompare1(0);
+                MOTOR_WriteCompare2(0);            
+            }
+        }else if(ReceiveData == down_state){
+            if(DOWN_LIMIT_Read() == 0){
+                MOTOR_WriteCompare1(0);
+                MOTOR_WriteCompare2(50);
+            }else{
+                MOTOR_WriteCompare1(0);
+                MOTOR_WriteCompare2(0);            
+            }
         }else{
         
         }
