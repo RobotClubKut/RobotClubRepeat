@@ -29,33 +29,29 @@ int main()
 {
 //    uint8 str[20];
     uint8 ReceiveData;
-    uint8 BaseData;
+    uint8 ArmData;
 //    uint8 debug_val1;
 //    uint8 status;
     CyGlobalIntEnable; /* Enable global interrupts. */
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-//    Debug_Start();
     LINSlaveInit();
     MOTOR_Start();
     ENABLE_Write(1);
     
-    /*デバッグ*/
-//    sprintf(str,"program start\n");
-//    Debug_PutString(str);
-    
+
     for(;;)
     {
         if(l_flg_tst_motor_frame() == 1)
 		{
-            ReceiveData = (uint8)l_u8_rd_Arm();
+            ReceiveData = (uint8)l_u8_rd_Base();
             l_flg_clr_motor_frame();
         }
         
         /*motor_state*/
         if(ReceiveData == 1){
             if(UP_LIMIT_Read() == 0){
-                MOTOR_WriteCompare1(100);
+                MOTOR_WriteCompare1(80);
                 MOTOR_WriteCompare2(0);
             }else{
                 MOTOR_WriteCompare1(0);
@@ -65,7 +61,7 @@ int main()
         else if(ReceiveData == 2){
             if(DOWN_LIMIT_Read() == 0){
                 MOTOR_WriteCompare1(0);
-                MOTOR_WriteCompare2(100);
+                MOTOR_WriteCompare2(80);
             }else{
                 MOTOR_WriteCompare1(0);
                 MOTOR_WriteCompare2(0);            
@@ -75,12 +71,6 @@ int main()
             MOTOR_WriteCompare1(0);
             MOTOR_WriteCompare2(0);
         }
-        
-        /*デバッグ*/
-        /*
-        sprintf(str,"UP = %d\n",(int)UP_LIMIT_Read());
-        Debug_PutString(str);
-        */
     }
 }
 
