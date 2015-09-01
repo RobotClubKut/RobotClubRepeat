@@ -29,7 +29,6 @@ int main()
 {
 //    uint8 str[20];
     uint8 ReceiveData;
-    uint8 ArmData;
 //    uint8 debug_val1;
 //    uint8 status;
     CyGlobalIntEnable; /* Enable global interrupts. */
@@ -50,19 +49,21 @@ int main()
         
         /*motor_state*/
         if(ReceiveData == 1){
-            if(UP_LIMIT_Read() == 0){
-                MOTOR_WriteCompare1(80);
-                MOTOR_WriteCompare2(0);
-            }else{
+            if(FRONT_LIMIT_Read() == 0){
+                MOTOR_WriteCompare1(0);
+                MOTOR_WriteCompare2(80);
+            }
+            else{
                 MOTOR_WriteCompare1(0);
                 MOTOR_WriteCompare2(0);            
             }
         }
         else if(ReceiveData == 2){
-            if(DOWN_LIMIT_Read() == 0){
-                MOTOR_WriteCompare1(0);
-                MOTOR_WriteCompare2(80);
-            }else{
+            if(BACK_LIMIT_Read() == 0){
+                MOTOR_WriteCompare1(80);
+                MOTOR_WriteCompare2(0);
+            }
+            else{
                 MOTOR_WriteCompare1(0);
                 MOTOR_WriteCompare2(0);            
             }

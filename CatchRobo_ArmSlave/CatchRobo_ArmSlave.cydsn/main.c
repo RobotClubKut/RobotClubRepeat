@@ -57,7 +57,8 @@ int main()
             if(UP_LIMIT_Read() == 0){
                 MOTOR_WriteCompare1(100);
                 MOTOR_WriteCompare2(0);
-            }else{
+            }
+            else{
                 MOTOR_WriteCompare1(0);
                 MOTOR_WriteCompare2(0);            
             }
@@ -66,7 +67,8 @@ int main()
             if(DOWN_LIMIT_Read() == 0){
                 MOTOR_WriteCompare1(0);
                 MOTOR_WriteCompare2(100);
-            }else{
+            }
+            else{
                 MOTOR_WriteCompare1(0);
                 MOTOR_WriteCompare2(0);            
             }
