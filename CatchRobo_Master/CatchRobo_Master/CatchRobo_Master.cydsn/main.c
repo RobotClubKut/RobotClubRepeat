@@ -17,7 +17,12 @@
 #define Open 0x01
 #define Close 0x02
 
-
+#define arm_stop 0x00
+#define arm_up  0x01
+#define arm_down 0x02
+#define base_stop 0x00
+#define base_front 0x10
+#define base_back 0x20
 
 int main()
 {
@@ -26,8 +31,7 @@ int main()
     uint8 L1,L2,UP,DOWN;
     uint8 arm_stop_flag = 0;
     uint8 base_stop_flag = 0;
-    uint8 debug_val1;
-    uint8 PutData[7] = {0x00,0x01,0x02,0x00,0x10,0x20,0x00};
+    uint8 PutData[6] = {arm_stop,arm_up,arm_down,base_stop,base_front,base_back};
     
     CyGlobalIntEnable; /* Enable global interrupts. */
     PS2_Start();
@@ -68,6 +72,7 @@ int main()
                 Debug_PutString(str);
             }
         }
+        
         /*Base*/
         if(psData.UP != UP){
             UP = psData.UP;
@@ -97,6 +102,7 @@ int main()
                 Debug_PutString(str);
             }
         }
+        
         /*Air*/
         if(psData.TRIANGLE){
             Pantograph_Write(Open);
@@ -125,14 +131,7 @@ int main()
         else{
             SidesHands_Write(Close);
         }
-        
-        /*デバック*/
-        /*
-        if(debug_val1 != motor_state){
-            debug_val1 = motor_state;
-            sprintf(str,"motor_state = %d\n",(int)motor_state);
-            Debug_PutString(str);
-        }*/
+     
     }
 }
 
