@@ -55,7 +55,7 @@ int main()
         /*motor_state*/
         if(ReceiveData == 1){
             if(UP_LIMIT_Read() == 0){
-                MOTOR_WriteCompare1(100);
+                MOTOR_WriteCompare1(200);
                 MOTOR_WriteCompare2(0);
             }
             else{
@@ -66,7 +66,7 @@ int main()
         else if(ReceiveData == 2){
             if(DOWN_LIMIT_Read() == 0){
                 MOTOR_WriteCompare1(0);
-                MOTOR_WriteCompare2(100);
+                MOTOR_WriteCompare2(200);
             }
             else{
                 MOTOR_WriteCompare1(0);
