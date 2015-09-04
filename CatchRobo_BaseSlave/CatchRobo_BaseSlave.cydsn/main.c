@@ -51,7 +51,7 @@ int main()
         if(ReceiveData == 1){
             if(FRONT_LIMIT_Read() == 0){
                 MOTOR_WriteCompare1(0);
-                MOTOR_WriteCompare2(80);
+                MOTOR_WriteCompare2(160);
             }
             else{
                 MOTOR_WriteCompare1(0);
@@ -60,7 +60,7 @@ int main()
         }
         else if(ReceiveData == 2){
             if(BACK_LIMIT_Read() == 0){
-                MOTOR_WriteCompare1(80);
+                MOTOR_WriteCompare1(160);
                 MOTOR_WriteCompare2(0);
             }
             else{

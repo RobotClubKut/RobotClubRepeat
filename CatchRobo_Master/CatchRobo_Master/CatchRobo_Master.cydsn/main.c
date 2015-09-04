@@ -69,6 +69,29 @@ void Arm_Motion(CYBIT button){
     }
 }
 
+/*Base*/
+void Base_Motion(CYBIT button){
+    static CYBIT button_flag = 0;
+    static CYBIT previous_state = 0;
+    char str[20];
+    if(button != previous_state){
+        previous_state = button;
+        if(button == 1){
+            if(button_flag == 0){
+                LIN_Master_PutArray(2,1,PutData+4);
+                sprintf(str,"FRONT\n");
+                Debug_PutString(str);
+            }
+            else if(button_flag == 1){
+                LIN_Master_PutArray(2,1,PutData+5);
+                sprintf(str,"BACK\n");
+                Debug_PutString(str);
+            }
+            button_flag = ~button_flag;
+        }
+    }
+}
+
 /*Pantograph*/
 void Pantograph_Motion(CYBIT button){
     static CYBIT button_flag;
@@ -226,24 +249,7 @@ int main()
                 Arm_Motion(psData.L1);
                 
                 /*Base*/
-                if(psData.UP != UP){
-                    UP = psData.UP;
-                    if(UP == 1){
-                        base_stop_flag = 0;
-                        LIN_Master_PutArray(2,1,PutData+4);
-                        sprintf(str,"FRONT\n");
-                        Debug_PutString(str);
-                    }
-                }
-                if(psData.DOWN != DOWN){
-                    DOWN = psData.DOWN;
-                    if(DOWN == 1){
-                        base_stop_flag = 0;
-                        LIN_Master_PutArray(2,1,PutData+5);
-                        sprintf(str,"BACK\n");
-                        Debug_PutString(str);
-                    }
-                }
+                Base_Motion(psData.R1);
                 
                 if(UP == DOWN){
                     if(base_stop_flag == 0)
