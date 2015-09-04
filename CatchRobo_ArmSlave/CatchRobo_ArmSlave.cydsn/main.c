@@ -40,6 +40,12 @@ int main()
     MOTOR_Start();
     ENABLE_Write(1);
     
+    //move to the initial position
+    while(UP_LIMIT_Read() == 0){
+        MOTOR_WriteCompare1(100);
+        MOTOR_WriteCompare2(0);
+    }
+    
     /*デバッグ*/
 //    sprintf(str,"program start\n");
 //    Debug_PutString(str);
