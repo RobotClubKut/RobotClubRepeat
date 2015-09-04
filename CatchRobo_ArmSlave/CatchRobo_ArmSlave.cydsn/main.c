@@ -12,6 +12,9 @@
 #include <project.h>
 #include <stdio.h>
 
+#define arm_go_up  0x01
+#define arm_go_down 0x02
+
 void LINSlaveInit()
 {
     if(0u != l_sys_init())
@@ -45,6 +48,8 @@ int main()
         MOTOR_WriteCompare1(100);
         MOTOR_WriteCompare2(0);
     }
+    MOTOR_WriteCompare1(0);
+    MOTOR_WriteCompare2(0);
     
     /*デバッグ*/
 //    sprintf(str,"program start\n");
@@ -59,7 +64,7 @@ int main()
         }
         
         /*motor_state*/
-        if(ReceiveData == 1){
+        if(ReceiveData == arm_go_up){
             if(UP_LIMIT_Read() == 0){
                 MOTOR_WriteCompare1(200);
                 MOTOR_WriteCompare2(0);
@@ -69,7 +74,7 @@ int main()
                 MOTOR_WriteCompare2(0);            
             }
         }
-        else if(ReceiveData == 2){
+        else if(ReceiveData == arm_go_down){
             if(DOWN_LIMIT_Read() == 0){
                 MOTOR_WriteCompare1(0);
                 MOTOR_WriteCompare2(200);

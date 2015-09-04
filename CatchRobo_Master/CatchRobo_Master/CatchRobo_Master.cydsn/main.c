@@ -18,15 +18,14 @@
 #define Close 0x02
 
 #define arm_stop 0x00
-#define arm_up  0x01
-#define arm_down 0x02
+#define arm_go_up  0x01
+#define arm_go_down 0x02
 #define base_stop 0x00
-#define base_front 0x10
-#define base_back 0x20
+#define base_go_front 0x10
+#define base_go_back 0x20
+#define base_go_mid 0x40
 
-#define AirDelay 200
-
-uint8 PutData[6] = {arm_stop,arm_up,arm_down,base_stop,base_front,base_back};
+uint8 PutData[7] = {arm_stop,arm_go_up,arm_go_down,base_stop,base_go_front,base_go_back,base_go_mid};
 
 void Automatic_State(uint8 number){
     if(number == 1){
@@ -70,24 +69,36 @@ void Arm_Motion(CYBIT button){
 }
 
 /*Base*/
-void Base_Motion(CYBIT button){
-    static CYBIT button_flag = 0;
-    static CYBIT previous_state = 0;
+void Base_Motion(CYBIT front,CYBIT mid,CYBIT back){
+    static CYBIT previous_state_front = 0;
+    static CYBIT previous_state_mid = 0;
+    static CYBIT previous_state_back = 0;
     char str[20];
-    if(button != previous_state){
-        previous_state = button;
-        if(button == 1){
-            if(button_flag == 0){
-                LIN_Master_PutArray(2,1,PutData+4);
-                sprintf(str,"FRONT\n");
-                Debug_PutString(str);
-            }
-            else if(button_flag == 1){
-                LIN_Master_PutArray(2,1,PutData+5);
-                sprintf(str,"BACK\n");
-                Debug_PutString(str);
-            }
-            button_flag = ~button_flag;
+    
+    if(front != previous_state_front){
+        previous_state_front = front;
+        if(front == 1){
+            sprintf(str,"FRONT\n");
+            Debug_PutString(str);
+            LIN_Master_PutArray(2,1,PutData+4);
+        }
+    }
+    
+    if(mid != previous_state_mid){
+        previous_state_mid = mid;
+        if(mid == 1){
+            sprintf(str,"MID\n");
+            Debug_PutString(str);
+            LIN_Master_PutArray(2,1,PutData+6);
+        }
+    }
+    
+    if(back != previous_state_back){
+        previous_state_back = back;
+        if(back == 1){
+            sprintf(str,"BACK\n");
+            Debug_PutString(str);
+            LIN_Master_PutArray(2,1,PutData+5);
         }
     }
 }
@@ -188,7 +199,6 @@ int main()
 {
     PS2Controller psData;
     char str[20];
-    uint8 UP,DOWN;
     uint8 arm_stop_flag = 0;
     uint8 base_stop_flag = 0;
     uint8 state;
@@ -249,17 +259,7 @@ int main()
                 Arm_Motion(psData.L1);
                 
                 /*Base*/
-                Base_Motion(psData.R1);
-                
-                if(UP == DOWN){
-                    if(base_stop_flag == 0)
-                    {
-                        base_stop_flag = 1;
-                        LIN_Master_PutArray(2,1,PutData+3);
-                        sprintf(str,"FRONT BACK stop\n");
-                        Debug_PutString(str);
-                    }
-                }
+                Base_Motion(psData.UP,psData.RIGHT,psData.DOWN);
                 
                 /*Air*/
                 Pantograph_Motion(psData.TRIANGLE);
