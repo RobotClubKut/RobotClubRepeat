@@ -268,12 +268,15 @@ int main()
             while(1){
                 psData = PS2_Controller_get();
                 
+                //mode　reset
                 if((psData.SELECT == 1) &&(psData.START == 1)){
                     state = 0;
                     sprintf(str,"mode reset\n");
                     Debug_PutString(str);
                     break;
                 }
+                
+                //State Increment
                 if(psData.CIRCLE != previous_circle){
                     previous_circle = psData.CIRCLE;
                     if(psData.CIRCLE == 1){
@@ -281,6 +284,7 @@ int main()
                     }
                 }
                 
+                //State Decrement
                 if(psData.CROSS != previous_cross){
                     previous_cross = psData.CROSS;
                     if(psData.CROSS == 1){
@@ -297,13 +301,13 @@ int main()
         }
         
         /*-----Manual Control------*/
-        
         if((psData.SELECT == 1) && (psData.CROSS == 1)){
             sprintf(str,"manual mode\n");
             Debug_PutString(str);
             while(1){
                 psData = PS2_Controller_get();
                 
+                //mode reset
                 if((psData.SELECT == 1) &&(psData.START == 1)){
                     sprintf(str,"mode reset\n");
                     Debug_PutString(str);
