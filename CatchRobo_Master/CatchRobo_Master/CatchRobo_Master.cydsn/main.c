@@ -17,49 +17,79 @@
 #define Open 0x01
 #define Close 0x02
 
-#define arm_stop 0x00
-#define arm_go_up  0x01
-#define arm_go_down 0x02
-#define base_stop 0x00
-#define base_go_front 0x10
-#define base_go_back 0x20
-#define base_go_mid 0x40
-
-uint8 PutData[7] = {arm_stop,arm_go_up,arm_go_down,base_stop,base_go_front,base_go_back,base_go_mid};
+uint8 arm_stop = 0x00;
+uint8 arm_go_up =  0x01;
+uint8 arm_go_down = 0x02;
+uint8 base_stop = 0x00;
+uint8 base_go_front = 0x10;
+uint8 base_go_back = 0x20;
+uint8 base_go_mid = 0x40;
 
 void Automatic_State(uint8 number){
     
+    /*state list*/
     if(number == 0){
-        LIN_Master_PutArray(2,1,PutData+1);
+        LIN_Master_PutArray(2,1,&arm_go_up);
         Pantograph_Write(Close);
         PantographHand_Write(Open);
         SidesHands_Write(Open);
-        MainHand_Write(Open);
-        LIN_Master_PutArray(2,1,PutData+5);
+        MainHand_Write(Close);
+        LIN_Master_PutArray(2,1,&base_go_back);
     }
-    
     else if(number == 1){
-        LIN_Master_PutArray(2,1,PutData+6);
+        LIN_Master_PutArray(2,1,&base_go_mid);
     }
-    
     else if(number == 2){
         Pantograph_Write(Open);
     }
-    
     else if(number == 3){
         PantographHand_Write(Close);
     }
-    
     else if(number == 4){
         Pantograph_Write(Close);
     }
     else if(number == 5){
         PantographHand_Write(Open);
     }
-    
-    else{
-    
+    else if(number == 6){
+        SidesHands_Write(Close);
     }
+    else if(number == 7){
+        MainHand_Write(Open);
+    }
+    else if(number == 8){
+        LIN_Master_PutArray(2,1,&arm_go_down);
+    }
+    else if(number == 9){
+        MainHand_Write(Close);
+    }
+    else if(number == 10){
+        LIN_Master_PutArray(2,1,&arm_go_up);
+    }
+    else if(number == 11){
+        LIN_Master_PutArray(2,1,&base_go_back);
+    }
+    else if(number == 12){
+        MainHand_Write(Open);
+    }
+    else if(number == 13){
+        LIN_Master_PutArray(2,1,&base_go_front);
+    }
+    else if(number == 14){
+        LIN_Master_PutArray(2,1,&arm_go_down);
+    }
+    else if(number == 15){
+        MainHand_Write(Close);
+    }
+    else if(number == 16){
+        LIN_Master_PutArray(2,1,&arm_go_up);
+    }
+    else if(number == 17){
+        LIN_Master_PutArray(2,1,&base_go_back);
+    }
+    else if(number == 18){
+        MainHand_Write(Open);
+    }    
 }
 
 /*Arm*/
@@ -71,12 +101,12 @@ void Arm_Motion(CYBIT button){
         previous_state = button;
         if(button == 1){
             if(button_flag == 0){
-                LIN_Master_PutArray(2,1,PutData+1);
+                LIN_Master_PutArray(2,1,&arm_go_up);
                 sprintf(str,"UP\n");
                 Debug_PutString(str);
             }
             else if(button_flag == 1){
-                LIN_Master_PutArray(2,1,PutData+2);
+                LIN_Master_PutArray(2,1,&arm_go_down);
                 sprintf(str,"DOWN\n");
                 Debug_PutString(str);
             }
@@ -97,7 +127,7 @@ void Base_Motion(CYBIT front,CYBIT mid,CYBIT back){
         if(front == 1){
             sprintf(str,"FRONT\n");
             Debug_PutString(str);
-            LIN_Master_PutArray(2,1,PutData+4);
+            LIN_Master_PutArray(2,1,&base_go_front);
         }
     }
     
@@ -106,7 +136,7 @@ void Base_Motion(CYBIT front,CYBIT mid,CYBIT back){
         if(mid == 1){
             sprintf(str,"MID\n");
             Debug_PutString(str);
-            LIN_Master_PutArray(2,1,PutData+6);
+            LIN_Master_PutArray(2,1,&base_go_mid);
         }
     }
     
@@ -115,7 +145,7 @@ void Base_Motion(CYBIT front,CYBIT mid,CYBIT back){
         if(back == 1){
             sprintf(str,"BACK\n");
             Debug_PutString(str);
-            LIN_Master_PutArray(2,1,PutData+5);
+            LIN_Master_PutArray(2,1,&base_go_back);
         }
     }
 }
@@ -216,14 +246,16 @@ int main()
 {
     PS2Controller psData;
     char str[20];
-    uint8 previos_state;
     uint8 state = 0;
-    CYBIT circle_flag=0,cross_flag=0,previous_circle=0,previous_cross;
+    CYBIT circle_flag=0,cross_flag=0,previous_circle=0,previous_cross=0;
     
     CyGlobalIntEnable; /* Enable global interrupts. */
     PS2_Start();
     Debug_Start();
     initLin();
+    
+    /*Machine Initialization*/
+    Automatic_State(0);
 
     while(1){
         
@@ -233,7 +265,6 @@ int main()
         if((psData.SELECT == 1) && (psData.CIRCLE == 1)){
             sprintf(str,"automatic mode\n");
             Debug_PutString(str);
-            CyDelay(1000);
             while(1){
                 psData = PS2_Controller_get();
                 
@@ -270,7 +301,6 @@ int main()
         if((psData.SELECT == 1) && (psData.CROSS == 1)){
             sprintf(str,"manual mode\n");
             Debug_PutString(str);
-            CyDelay(1000);
             while(1){
                 psData = PS2_Controller_get();
                 
