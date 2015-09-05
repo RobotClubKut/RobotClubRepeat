@@ -28,16 +28,33 @@
 uint8 PutData[7] = {arm_stop,arm_go_up,arm_go_down,base_stop,base_go_front,base_go_back,base_go_mid};
 
 void Automatic_State(uint8 number){
-    if(number == 1){
     
+    if(number == 0){
+        LIN_Master_PutArray(2,1,PutData+1);
+        Pantograph_Write(Close);
+        PantographHand_Write(Open);
+        SidesHands_Write(Open);
+        MainHand_Write(Open);
+        LIN_Master_PutArray(2,1,PutData+5);
+    }
+    
+    else if(number == 1){
+        LIN_Master_PutArray(2,1,PutData+6);
     }
     
     else if(number == 2){
-    
+        Pantograph_Write(Open);
     }
     
     else if(number == 3){
+        PantographHand_Write(Close);
+    }
     
+    else if(number == 4){
+        Pantograph_Write(Close);
+    }
+    else if(number == 5){
+        PantographHand_Write(Open);
     }
     
     else{
@@ -199,16 +216,14 @@ int main()
 {
     PS2Controller psData;
     char str[20];
-    uint8 arm_stop_flag = 0;
-    uint8 base_stop_flag = 0;
-    uint8 state;
-    CYBIT CIRCLE,CROSS;
+    uint8 previos_state;
+    uint8 state = 0;
+    CYBIT circle_flag=0,cross_flag=0,previous_circle=0,previous_cross;
     
     CyGlobalIntEnable; /* Enable global interrupts. */
     PS2_Start();
     Debug_Start();
     initLin();
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
 
     while(1){
         
@@ -228,14 +243,24 @@ int main()
                     Debug_PutString(str);
                     break;
                 }
-                if(psData.CIRCLE == 1){
-                    if(CIRCLE == 1){
-                    
+                if(psData.CIRCLE != previous_circle){
+                    previous_circle = psData.CIRCLE;
+                    if(psData.CIRCLE == 1){
+                        state = state + 1;
+                    }
+                }
+                
+                if(psData.CROSS != previous_cross){
+                    previous_cross = psData.CROSS;
+                    if(psData.CROSS == 1){
+                        if(state >= 1){
+                            state = state - 1;
+                        }
                     }
                 }
                 
                 Automatic_State(state);
-            
+                
             }
         
         }
