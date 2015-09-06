@@ -53,7 +53,7 @@ void MotorBack()
 
 int main()
 {
-    uint8 str[23];
+//    uint8 str[23];
     uint8 ReceiveData;
     CYBIT MIDPOINT;
     uint8 position;
@@ -63,7 +63,7 @@ int main()
     LINSlaveInit();
     MOTOR_Start();
     ENABLE_Write(1);
-    Debug_Start();
+//    Debug_Start();
     Comp_Start();
     
     //move to the initial position
@@ -88,8 +88,8 @@ int main()
             if(ReceiveData == base_go_front){
                 while(FRONT_LIMIT_Read() == 0){
                     MotorFront();
-                    sprintf(str,"point1\n");
-                    Debug_PutString(str);
+//                    sprintf(str,"point1\n");
+//                    Debug_PutString(str);
                 }
                 MotorStop();
                 position = front_position;
@@ -98,8 +98,8 @@ int main()
                 while(MIDPOINT == 1){
                     MIDPOINT = Comp_GetCompare();
                     MotorFront();
-                    sprintf(str,"point2\n");
-                    Debug_PutString(str);
+//                    sprintf(str,"point2\n");
+//                    Debug_PutString(str);
                 }
                 MotorStop();
                 position = mid_position;
@@ -110,8 +110,8 @@ int main()
             if(ReceiveData == base_go_front){
                 while(FRONT_LIMIT_Read() == 0){
                     MotorFront();
-                    sprintf(str,"point3\n");
-                    Debug_PutString(str);
+//                    sprintf(str,"point3\n");
+//                    Debug_PutString(str);
                 }
                 MotorStop();
                 position = front_position;
@@ -119,8 +119,8 @@ int main()
             if(ReceiveData == base_go_back){
                 while(BACK_LIMIT_Read() == 0){
                     MotorBack();
-                    sprintf(str,"point4\n");
-                    Debug_PutString(str);
+//                    sprintf(str,"point4\n");
+//                    Debug_PutString(str);
                 }
                 MotorStop();
                 position = back_position;
@@ -133,8 +133,8 @@ int main()
                 while(MIDPOINT == 1){
                     MIDPOINT = Comp_GetCompare();
                     MotorBack();
-                    sprintf(str,"point5\n");
-                    Debug_PutString(str);
+//                    sprintf(str,"point5\n");
+//                    Debug_PutString(str);
                 }
                 MotorStop();
                 position = mid_position;
@@ -142,16 +142,16 @@ int main()
             if(ReceiveData == base_go_back){
                 while(BACK_LIMIT_Read() == 0){
                     MotorBack();
-                    sprintf(str,"point6\n");
-                    Debug_PutString(str);
+//                    sprintf(str,"point6\n");
+//                    Debug_PutString(str);
                 }
                 MotorStop();
                 position = back_position;
             }
         }
         
-        sprintf(str,"position = %d data = %d\n",(int) position,(int) ReceiveData);
-        Debug_PutString(str);
+//        sprintf(str,"position = %d data = %d\n",(int) position,(int) ReceiveData);
+//        Debug_PutString(str);
         
     }
 }
