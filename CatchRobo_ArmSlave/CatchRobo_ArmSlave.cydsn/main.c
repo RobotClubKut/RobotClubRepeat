@@ -32,13 +32,13 @@ int main()
 {
 //    uint8 str[20];
     uint8 ReceiveData;
-    uint8 BaseData;
+//    uint8 BaseData;
 //    uint8 debug_val1;
 //    uint8 status;
     CyGlobalIntEnable; /* Enable global interrupts. */
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-//    Debug_Start();
+    Debug_Start();
     LINSlaveInit();
     MOTOR_Start();
     ENABLE_Write(1);
@@ -51,9 +51,6 @@ int main()
     MOTOR_WriteCompare1(0);
     MOTOR_WriteCompare2(0);
     
-    /*デバッグ*/
-//    sprintf(str,"program start\n");
-//    Debug_PutString(str);
     
     for(;;)
     {

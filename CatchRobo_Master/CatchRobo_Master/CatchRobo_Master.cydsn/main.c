@@ -41,6 +41,7 @@ void Automatic_State(uint8 number){
     }
     else if(number == 2){
         Pantograph_Write(Open);
+        MainHand_Write(Open);
     }
     else if(number == 3){
         PantographHand_Write(Close);
@@ -53,42 +54,38 @@ void Automatic_State(uint8 number){
     }
     else if(number == 6){
         SidesHands_Write(Close);
+        LIN_Master_PutArray(2,1,&arm_go_down);
     }
     else if(number == 7){
-        MainHand_Write(Open);
+        MainHand_Write(Close);
     }
     else if(number == 8){
-        LIN_Master_PutArray(2,1,&arm_go_down);
+        LIN_Master_PutArray(2,1,&arm_go_up);
     }
     else if(number == 9){
-        MainHand_Write(Close);
+        LIN_Master_PutArray(2,1,&base_go_back);
     }
     else if(number == 10){
-        LIN_Master_PutArray(2,1,&arm_go_up);
+        MainHand_Write(Open);
+        SidesHands_Write(Open);
     }
     else if(number == 11){
-        LIN_Master_PutArray(2,1,&base_go_back);
-    }
-    else if(number == 12){
-        MainHand_Write(Open);
-    }
-    else if(number == 13){
         LIN_Master_PutArray(2,1,&base_go_front);
     }
-    else if(number == 14){
+    else if(number == 12){
         LIN_Master_PutArray(2,1,&arm_go_down);
     }
+    else if(number == 13){
+         MainHand_Write(Close);
+    }
+    else if(number == 14){
+        LIN_Master_PutArray(2,1,&arm_go_up);    
+    }
     else if(number == 15){
-        MainHand_Write(Close);
+       LIN_Master_PutArray(2,1,&base_go_back);
     }
     else if(number == 16){
-        LIN_Master_PutArray(2,1,&arm_go_up);
-    }
-    else if(number == 17){
-        LIN_Master_PutArray(2,1,&base_go_back);
-    }
-    else if(number == 18){
-        MainHand_Write(Open);
+         MainHand_Write(Open);
     }    
 }
 
@@ -254,15 +251,16 @@ int main()
     Debug_Start();
     initLin();
     
-    /*Machine Initialization*/
-    Automatic_State(0);
 
     while(1){
         
         psData = PS2_Controller_get();
         
+        /*Machine Initialization*/
+        Automatic_State(0);
+        
         /*-----Automatic Control------*/
-        if((psData.SELECT == 1) && (psData.CIRCLE == 1)){
+        if((psData.SELECT == 1) && (psData.TRIANGLE == 1)){
             sprintf(str,"automatic mode\n");
             Debug_PutString(str);
             while(1){
