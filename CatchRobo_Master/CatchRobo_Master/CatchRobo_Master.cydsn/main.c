@@ -24,6 +24,12 @@ uint8 base_stop = 0x00;
 uint8 base_go_front = 0x10;
 uint8 base_go_back = 0x20;
 uint8 base_go_mid = 0x40;
+CYBIT flag;
+
+CY_ISR(flag_isr)
+{
+    flag = 1;
+}
 
 void Automatic_State(uint8 number){
     
@@ -54,37 +60,39 @@ void Automatic_State(uint8 number){
     }
     else if(number == 6){
         SidesHands_Write(Close);
-        LIN_Master_PutArray(2,1,&arm_go_down);
     }
     else if(number == 7){
-        MainHand_Write(Close);
+        LIN_Master_PutArray(2,1,&arm_go_down);
     }
     else if(number == 8){
-        LIN_Master_PutArray(2,1,&arm_go_up);
+        MainHand_Write(Close);
     }
     else if(number == 9){
-        LIN_Master_PutArray(2,1,&base_go_back);
+        LIN_Master_PutArray(2,1,&arm_go_up);
     }
     else if(number == 10){
+        LIN_Master_PutArray(2,1,&base_go_back);
+    }
+    else if(number == 11){
         MainHand_Write(Open);
         SidesHands_Write(Open);
     }
-    else if(number == 11){
+    else if(number == 12){
         LIN_Master_PutArray(2,1,&base_go_front);
     }
-    else if(number == 12){
+    else if(number == 13){
         LIN_Master_PutArray(2,1,&arm_go_down);
     }
-    else if(number == 13){
+    else if(number == 14){
          MainHand_Write(Close);
     }
-    else if(number == 14){
+    else if(number == 15){
         LIN_Master_PutArray(2,1,&arm_go_up);    
     }
-    else if(number == 15){
+    else if(number == 16){
        LIN_Master_PutArray(2,1,&base_go_back);
     }
-    else if(number == 16){
+    else if(number == 17){
          MainHand_Write(Open);
     }    
 }
@@ -250,7 +258,7 @@ int main()
     PS2_Start();
     Debug_Start();
     initLin();
-    
+    flag_StartEx(flag_isr);
 
     while(1){
         
@@ -292,7 +300,10 @@ int main()
                     }
                 }
                 
-                Automatic_State(state);
+                if(flag == 1){
+                    Automatic_State(state);
+                    flag = 0;
+                }
                 
             }
         
